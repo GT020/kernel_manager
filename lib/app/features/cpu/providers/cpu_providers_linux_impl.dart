@@ -1,7 +1,7 @@
 import 'package:kernel_manager/app/features/cpu/model/core_model.dart';
-import 'package:kernel_manager/app/features/cpu/services/cpu_services.dart';
+import 'package:kernel_manager/app/features/cpu/providers/cpu_providers.dart';
 
-class CpuServiceLinux implements CpuServices {
+class CpuProviderLinux implements CpuProviders {
   @override
   Future<List<List<int>>> getCoreStructure() {
     // TODO: implement getCoreStructure

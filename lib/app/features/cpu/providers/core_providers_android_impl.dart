@@ -1,7 +1,7 @@
-import 'package:kernel_manager/app/features/cpu/services/core_services.dart';
+import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
 import 'package:kernel_manager/app/utils/read_utils.dart';
 
-class CoreServiceAndroid implements CoreServices {
+class CoreProviderAndroid implements CoreProviders {
   RegExp frequencyRegex = RegExp(
     r"![\d+]",
   );

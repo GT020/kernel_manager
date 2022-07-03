@@ -1,6 +1,6 @@
-import 'package:kernel_manager/app/features/cpu/services/core_services.dart';
+import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
 
-class CoreServiceLinux implements CoreServices {
+class CoreProviderLinux implements CoreProviders {
   @override
   Future<List<int>> getAvailableFrequencies(int coreNumber) {
     // TODO: implement getAvailableFrequencies
