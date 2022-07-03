@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/app/features/cpu/view/cpu_view.dart';
+import 'package:kernel_manager/app/features/cpu/view/cpu_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
