@@ -63,15 +63,12 @@ class CpuProviderAndroid implements CpuProviders {
   @override
   Future<List<CpuCore>> getCpuCores(List<List<int>> coreStructure) async {
     List<CpuCore> cpuCores = [];
-    //TODO: since we know core from same cluster have same frequencies and same governors we need to optimize this logic
     for (List<int> cluster in coreStructure) {
-      for (int core in cluster) {
-        cpuCores.add(CpuCore(
-            await coreProviders.getAvailableFrequencies(core),
-            core,
-            await coreProviders.getCoreFrequency(core),
-            await coreProviders.getAvailableGovernor(core)));
-      }
+      cpuCores.add(CpuCore(
+          await coreProviders.getAvailableFrequencies(cluster[0]),
+          cluster[0],
+          await coreProviders.getCoreFrequency(cluster[0]),
+          await coreProviders.getAvailableGovernor(cluster[0])));
     }
     return cpuCores;
   }

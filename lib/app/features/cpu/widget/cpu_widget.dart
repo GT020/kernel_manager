@@ -14,7 +14,7 @@ class CpuWidget extends StatelessWidget {
         Text(cpu.name),
         Text(cpu.process),
         Text(cpu.numberOfCores.toString()),
-        CoreWidget(core: cpu.cores[0])
+        ...cpu.cores.map((core) => CoreWidget(core: core)),
       ],
     );
   }
