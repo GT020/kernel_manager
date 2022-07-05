@@ -1,8 +1,30 @@
+import 'dart:io';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kernel_manager/app/features/gpu/model/gpu_model.dart';
+import 'package:kernel_manager/app/features/gpu/providers/gpu_providers.dart';
+import 'package:kernel_manager/app/features/gpu/providers/gpu_providers_android.dart';
+import 'package:kernel_manager/app/features/gpu/providers/gpu_providers_linux.dart';
 import 'gpu_repository.dart';
 
 class GpuRepositoryImpl extends GpuRepository {
-  // TODO add your methods here
+  late final GpuProviders gpuProviders;
+  GpuRepositoryImpl() {
+    if (Platform.isAndroid) {
+      gpuProviders = GpuProvidersAndroid();
+    }
+    if (Platform.isLinux) {
+      gpuProviders = GpuProvidersLinux();
+    }
+  }
+  @override
+  Future<GpuModel> getGpu() async {
+    return GpuModel(
+        await gpuProviders.getGpuName(),
+        await gpuProviders.getGpuCurrentFrequencyNode(),
+        await gpuProviders.getGpuAvailableFrequencies(),
+        await gpuProviders.getGpuAvailableGovernors());
+  }
 }
 
 final gpuRepositoryProvider = Provider<GpuRepository>((ref) {
