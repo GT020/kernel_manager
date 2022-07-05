@@ -30,7 +30,6 @@ class CoreProviderAndroid implements CoreProviders {
 
   @override
   Future<String> getCoreFrequency(int coreNumber) async {
-    return await ReadUtil.ioRead(
-        '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_cur_freq');
+    return '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_cur_freq';
   }
 }

@@ -1,9 +1,9 @@
 class CpuCore {
   final int coreNumber;
-  final String currentFrequency;
+  final String currentFrequencyNode;
   final List<int> availableFrequencies;
   final List<String> availableGovernor;
 
-  CpuCore(this.availableFrequencies, this.coreNumber, this.currentFrequency,
+  CpuCore(this.availableFrequencies, this.coreNumber, this.currentFrequencyNode,
       this.availableGovernor);
 }
