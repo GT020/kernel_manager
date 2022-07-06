@@ -12,7 +12,7 @@ class CpuView extends ConsumerWidget {
   /// Creates a [CpuView].
   const CpuView({Key? key}) : super(key: key);
 
-  static const routeName = '/';
+  static const routeName = '/cpu';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

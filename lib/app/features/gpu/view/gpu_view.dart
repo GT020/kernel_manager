@@ -9,6 +9,6 @@ class GpuView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const SizedBox();
+    return const Scaffold();
   }
 }
