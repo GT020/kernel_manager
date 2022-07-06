@@ -4,24 +4,33 @@ import 'package:kernel_manager/app/utils/read_utils.dart';
 class GpuProvidersAndroid implements GpuProviders {
   @override
   Future<List<int>> getGpuAvailableFrequencies() async {
-    String availableFrequencies = await ReadUtil.ioRead(
-        '/sys/class/kgsl/kgsl-3d0/gpu_available_frequencies');
     List<int> intF = [];
 
-    List<String> a = availableFrequencies.trim().split(" ");
-    for (String freq in a) {
-      intF.add(int.parse(freq));
+    try {
+      String availableFrequencies = await ReadUtil.ioRead(
+          '/sys/class/kgsl/kgsl-3d0/gpu_available_frequencies');
+
+      List<String> a = availableFrequencies.trim().split(" ");
+      for (String freq in a) {
+        intF.add(int.parse(freq));
+      }
+    } catch (e) {
+      print(e);
     }
     return intF;
   }
 
   @override
   Future<List<String>> getGpuAvailableGovernors() async {
-    List<String> availableGovernor = (await ReadUtil.ioRead(
-            '/sys/class/kgsl/kgsl-3d0/devfreq/available_governors'))
-        .split(' ');
+    try {
+      List<String> availableGovernor = (await ReadUtil.ioRead(
+              '/sys/class/kgsl/kgsl-3d0/devfreq/available_governors'))
+          .split(' ');
 
-    return availableGovernor;
+      return availableGovernor;
+    } catch (e) {
+      return [e.toString()];
+    }
   }
 
   @override
