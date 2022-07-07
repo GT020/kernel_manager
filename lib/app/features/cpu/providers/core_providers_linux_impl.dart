@@ -1,4 +1,4 @@
-import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
 
 class CoreProviderLinux implements CoreProviders {
   @override

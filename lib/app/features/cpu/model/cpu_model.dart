@@ -1,4 +1,4 @@
-import 'package:kernel_manager/app/features/cpu/model/core_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/model/core_model.dart';
 
 class CpuModel {
   final String name;

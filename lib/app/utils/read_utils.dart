@@ -24,6 +24,10 @@ class ReadUtil {
 
   /// Return the value of path provided as String using File
   static Future<String> ioRead(String path) async {
-    return await File(path).readAsString();
+    try {
+      return await File(path).readAsString();
+    } catch (e) {
+      return e.toString();
+    }
   }
 }

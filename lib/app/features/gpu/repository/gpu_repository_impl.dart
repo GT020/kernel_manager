@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kernel_manager/app/features/gpu/model/gpu_model.dart';
-import 'package:kernel_manager/app/features/gpu/providers/gpu_providers.dart';
-import 'package:kernel_manager/app/features/gpu/providers/gpu_providers_android.dart';
-import 'package:kernel_manager/app/features/gpu/providers/gpu_providers_linux.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers_android.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers_linux.dart';
 import 'gpu_repository.dart';
 
 class GpuRepositoryImpl extends GpuRepository {

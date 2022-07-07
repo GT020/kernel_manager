@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kernel_manager/app/utils/read_utils.dart';
+import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 class FrequencyWidget extends StatefulWidget {
   final String frequencyNode;

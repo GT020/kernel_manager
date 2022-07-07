@@ -1,5 +1,5 @@
-import 'package:kernel_manager/app/features/cpu/model/core_model.dart';
-import 'package:kernel_manager/app/features/cpu/providers/cpu_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/model/core_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/cpu_providers.dart';
 
 class CpuProviderLinux implements CpuProviders {
   @override

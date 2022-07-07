@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kernel_manager/app/features/cpu/model/cpu_model.dart';
-import 'package:kernel_manager/app/features/cpu/repository/cpu_repository_impl.dart';
-import 'package:kernel_manager/app/features/cpu/widget/cpu_widget.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/model/cpu_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/repository/cpu_repository_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/widget/cpu_widget.dart';
 
 final FutureProvider<CpuModel> cpuProvider = FutureProvider((ref) {
   return CpuRepositoryImpl().getCpu();

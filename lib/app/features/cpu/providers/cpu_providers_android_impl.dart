@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:kernel_manager/app/features/cpu/model/core_model.dart';
-import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
-import 'package:kernel_manager/app/features/cpu/providers/core_providers_android_impl.dart';
-import 'package:kernel_manager/app/features/cpu/providers/cpu_providers.dart';
-import 'package:kernel_manager/app/utils/read_utils.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/model/core_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers_android_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/cpu_providers.dart';
+import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 class CpuProviderAndroid implements CpuProviders {
   RegExp arcRegex = RegExp(

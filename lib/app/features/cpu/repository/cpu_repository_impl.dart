@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:kernel_manager/app/features/cpu/model/cpu_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/model/cpu_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
-import 'package:kernel_manager/app/features/cpu/providers/core_providers_android_impl.dart';
-import 'package:kernel_manager/app/features/cpu/providers/core_providers_linux_impl.dart';
-import 'package:kernel_manager/app/features/cpu/providers/cpu_providers.dart';
-import 'package:kernel_manager/app/features/cpu/providers/cpu_providers_android_impl.dart';
-import 'package:kernel_manager/app/features/cpu/providers/cpu_providers_linux_impl.dart';
-import 'package:kernel_manager/app/features/cpu/repository/cpu_repository.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers_android_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers_linux_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/cpu_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/cpu_providers_android_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/cpu_providers_linux_impl.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/repository/cpu_repository.dart';
 
 
 class CpuRepositoryImpl extends CpuRepository {

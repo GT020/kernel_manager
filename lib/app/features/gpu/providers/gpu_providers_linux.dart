@@ -1,4 +1,4 @@
-import 'package:kernel_manager/app/features/gpu/providers/gpu_providers.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
 
 class GpuProvidersLinux implements GpuProviders{
   @override

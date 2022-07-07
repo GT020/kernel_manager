@@ -1,5 +1,5 @@
-import 'package:kernel_manager/app/features/cpu/providers/core_providers.dart';
-import 'package:kernel_manager/app/utils/read_utils.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
+import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 class CoreProviderAndroid implements CoreProviders {
   RegExp frequencyRegex = RegExp(
