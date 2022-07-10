@@ -1,16 +1,23 @@
-# kernel_manager
+# Penguin Kernel Manager 
+<img src="https://user-images.githubusercontent.com/47667827/177736849-2030d807-a9c5-4d02-afc4-7eb3dc8b6436.png" height="150">
 
-A new Flutter project.
+<br />
+<br />
 
-## Getting Started
+A kernel manger for Linux
 
-This project is a starting point for a Flutter application.
+<br />
 
-A few resources to get you started if this is your first Flutter project:
+### Status
+Work in Progress
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+<br />
+
+
+
+
+### Author And Maintainer:
+
+- [@GT020](https://github.com/GT020)
