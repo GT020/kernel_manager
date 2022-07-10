@@ -32,4 +32,24 @@ class CoreProviderAndroid implements CoreProviders {
   Future<String> getCoreFrequency(int coreNumber) async {
     return '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_cur_freq';
   }
+
+  @override
+  Future<Map<double, double>> getCoreStates(int coreNumber) async {
+    //TODO: factor in deepsleep
+    Map<double, double> coreStates = {};
+    String state = await ReadUtil.ioRead(
+        '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/stats/time_in_state');
+    List<String> listStates = state.split("\n");
+    for (String st in listStates) {
+      if (st.isEmpty) {
+        continue;
+      }
+      List<String> list = st.split(" ");
+      double freq = double.parse(list[0]) / 1000;
+      double time = double.parse(list[1]);
+      coreStates[freq] = time;
+    }
+
+    return coreStates;
+  }
 }

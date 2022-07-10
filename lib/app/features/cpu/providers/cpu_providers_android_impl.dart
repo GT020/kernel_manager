@@ -64,11 +64,15 @@ class CpuProviderAndroid implements CpuProviders {
   Future<List<CpuCore>> getCpuCores(List<List<int>> coreStructure) async {
     List<CpuCore> cpuCores = [];
     for (List<int> cluster in coreStructure) {
-      cpuCores.add(CpuCore(
+      cpuCores.add(
+        CpuCore(
           await coreProviders.getAvailableFrequencies(cluster[0]),
           cluster[0],
           await coreProviders.getCoreFrequency(cluster[0]),
-          await coreProviders.getAvailableGovernor(cluster[0])));
+          await coreProviders.getAvailableGovernor(cluster[0]),
+          await coreProviders.getCoreStates(cluster[0]),
+        ),
+      );
     }
     return cpuCores;
   }

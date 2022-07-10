@@ -18,4 +18,10 @@ class CoreProviderLinux implements CoreProviders {
     // TODO: implement getCoreFrequency
     throw UnimplementedError();
   }
+
+  @override
+  Future<Map<double,double>> getCoreStates(int coreNumber) {
+    // TODO: implement getCoreStates
+    throw UnimplementedError();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/model/core_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu/widget/frequency_history_widget.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/widget/frequency_widget.dart';
 
 class CoreWidget extends StatelessWidget {
@@ -10,9 +11,7 @@ class CoreWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FrequencyWidget(
-          frequencyNode: core.currentFrequencyNode,
-        ),
+        FrequencyHistory(history: core.state),
       ],
     );
   }
