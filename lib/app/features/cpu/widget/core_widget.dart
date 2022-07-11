@@ -11,7 +11,14 @@ class CoreWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FrequencyHistory(history: core.state),
+        ExpansionTile(
+            title: FrequencyWidget(frequencyNode: core.currentFrequencyNode),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FrequencyHistory(history: core.state),
+              )
+            ]),
       ],
     );
   }
