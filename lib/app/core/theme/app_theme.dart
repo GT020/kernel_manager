@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 class AppTheme {
   /// for getting light theme
   ThemeData get lightTheme {
-    // TODO: add light theme here
-    return ThemeData();
+    return FlexThemeData.light(
+      scheme: FlexScheme.material,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 20,
+      appBarOpacity: 0.95,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 20,
+        blendOnColors: false,
+      ),
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      useMaterial3: true,
+    );
   }
 
   /// for getting dark theme
   ThemeData get darkTheme {
-    // TODO: add dark theme here
-    return ThemeData();
+    return FlexThemeData.dark(
+      scheme: FlexScheme.material,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
+      appBarStyle: FlexAppBarStyle.background,
+      appBarOpacity: 0.90,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 30,
+      ),
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      useMaterial3: true,
+    );
   }
 }
 
