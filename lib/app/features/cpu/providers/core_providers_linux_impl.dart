@@ -1,3 +1,4 @@
+import 'package:penguin_kernel_manager/app/features/cpu/model/core_state_model.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
 
 class CoreProviderLinux implements CoreProviders {
@@ -20,7 +21,7 @@ class CoreProviderLinux implements CoreProviders {
   }
 
   @override
-  Future<Map<double,double>> getCoreStates(int coreNumber) {
+  Future<List<CoreStateModel>> getCoreStates(int coreNumber) {
     // TODO: implement getCoreStates
     throw UnimplementedError();
   }
