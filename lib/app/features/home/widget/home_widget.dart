@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeWidget extends StatelessWidget {
-  /// TODO add your comment here
+  /// Home Widget
   const HomeWidget({Key? key}) : super(key: key);
 
   @override

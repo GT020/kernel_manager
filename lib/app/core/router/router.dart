@@ -10,7 +10,6 @@ import 'package:penguin_kernel_manager/app/features/home/view/home_view.dart';
 final routerProvider = Provider<GoRouter>(
   (ref) {
     return GoRouter(
-      // TODO: add your router here
       routes: [
         /// for showing onboarding
         GoRoute(

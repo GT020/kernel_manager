@@ -15,12 +15,9 @@ class KernelManager extends ConsumerWidget {
     final router = ref.read(routerProvider);
 
     return MaterialApp.router(
-      // TODO: add your app name here
       title: 'Kernel Manager',
-      // TODO: add localization here
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      // TODO: add theme here
       theme: appTheme.lightTheme,
       darkTheme: appTheme.darkTheme,
       routeInformationParser: router.routeInformationParser,

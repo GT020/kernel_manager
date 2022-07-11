@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/model/cpu_model.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/widget/core_widget.dart';
-import 'package:penguin_kernel_manager/app/features/cpu/widget/frequency_history_widget.dart';
 
 class CpuWidget extends StatelessWidget {
   final CpuModel cpu;

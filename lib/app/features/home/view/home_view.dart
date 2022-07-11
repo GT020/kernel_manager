@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/core/router/router.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/view/cpu_view.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/view/gpu_view.dart';
 
 class HomeView extends ConsumerWidget {
-  /// TODO add your comment here
+  /// Home View
   const HomeView({Key? key}) : super(key: key);
 
   static const routeName = '/';

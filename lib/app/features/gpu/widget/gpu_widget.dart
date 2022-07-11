@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GpuWidget extends StatelessWidget {
-  /// TODO add your comment here
+  /// Gpu Widget
   const GpuWidget({Key? key}) : super(key: key);
 
   @override
