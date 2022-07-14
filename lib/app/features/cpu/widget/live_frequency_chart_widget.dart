@@ -16,9 +16,9 @@ final liveFrequencyProvider = StreamProvider.family<double, String>(
   },
 );
 
-class LiveFrequencyGraphWidget extends ConsumerWidget {
+class LiveFrequencyGraphWidget extends StatelessWidget {
   final Queue<double> last10Frequencies = Queue<double>();
-  final String currentFrequencyNode;
+  final Stream<String> currentFrequencyStream;
   final double maxFrequency;
   final double height;
   final double width;
@@ -28,35 +28,39 @@ class LiveFrequencyGraphWidget extends ConsumerWidget {
       required this.color,
       required this.height,
       required this.width,
-      required this.currentFrequencyNode,
+      required this.currentFrequencyStream,
       required this.maxFrequency})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<double> freqCached =
-        ref.watch(liveFrequencyProvider(currentFrequencyNode));
-    return freqCached.when(
-        data: (data) {
-          last10Frequencies.add(data);
-          if (last10Frequencies.length > 20) {
-            last10Frequencies.removeFirst();
-          }
-
-          return GridPaper(
-            child: CustomPaint(
-              size: Size(width, height),
-              painter: FrequencyGraphPainter(
-                  color: color,
-                  freqs: last10Frequencies,
-                  maxF: (maxFrequency).toDouble()),
-            ),
-          );
-        },
-        error: (error, s) {
-          return const Text('error');
-        },
-        loading: () => const CircularProgressIndicator());
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamBuilder<String>(
+          builder: (context, snap) {
+            if (snap.hasData) {
+              if (last10Frequencies.length > 10) {
+                last10Frequencies.removeFirst();
+              }
+              last10Frequencies.add(double.parse(snap.requireData));
+              return GridPaper(
+                child: CustomPaint(
+                  size: Size(width, height),
+                  painter: FrequencyGraphPainter(
+                      color: color,
+                      freqs: last10Frequencies,
+                      maxF: (maxFrequency).toDouble()),
+                ),
+              );
+            }
+            return GridPaper(
+              child: SizedBox(
+                height: height,
+                width: width,
+              ),
+            );
+          },
+          stream: currentFrequencyStream),
+    );
   }
 }
 

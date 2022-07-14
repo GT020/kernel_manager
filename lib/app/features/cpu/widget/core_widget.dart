@@ -6,30 +6,46 @@ import 'package:penguin_kernel_manager/app/features/cpu/model/core_model.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/widget/frequency_history_widget.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/widget/frequency_widget.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/widget/live_frequency_chart_widget.dart';
+import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-class CoreWidget extends StatelessWidget {
+class CoreWidget extends StatefulWidget {
   final CpuCore core;
-
   const CoreWidget({Key? key, required this.core}) : super(key: key);
+
+  @override
+  State<CoreWidget> createState() => _CoreWidgetState();
+}
+
+class _CoreWidgetState extends State<CoreWidget> {
+  late final Stream<String> frequencyStream;
+  @override
+  void initState() {
+    super.initState();
+    frequencyStream = ReadUtil.readStream(widget.core.currentFrequencyNode)
+        .asBroadcastStream();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
         title: Text(
-          'Core Number ${core.coreNumber} ',
+          'Core Number ${widget.core.coreNumber} ',
           style: Theme.of(context).textTheme.bodyText1,
         ),
-        subtitle: FrequencyWidget(frequencyNode: core.currentFrequencyNode),
+        subtitle: FrequencyWidget(
+          frequencyStream: frequencyStream,
+          textStyle: Theme.of(context).textTheme.bodyText1,
+        ),
         trailing: LiveFrequencyGraphWidget(
             color: Theme.of(context).primaryColor,
             height: 30,
             width: 80,
-            currentFrequencyNode: core.currentFrequencyNode,
-            maxFrequency: core.availableFrequencies.last.toDouble()),
+            currentFrequencyStream: frequencyStream,
+            maxFrequency: widget.core.availableFrequencies.last.toDouble()),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: FrequencyHistory(history: core.state),
+            child: FrequencyHistory(history: widget.core.state),
           )
         ]);
   }
