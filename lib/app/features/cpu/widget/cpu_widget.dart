@@ -10,12 +10,29 @@ class CpuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(cpu.architecture),
-          Text(cpu.name),
-          Text(cpu.process),
-          Text(cpu.numberOfCores.toString()),
-          ...cpu.cores.map((core) => CoreWidget(core: core)),
+          Card(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Architecture : ${cpu.architecture}'),
+          )),
+          Card(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Model : ${cpu.name}'),
+          )),
+          Card(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Fabrication Node : ${cpu.process}'),
+          )),
+          Card(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Number of Cores : ${cpu.numberOfCores}"),
+          )),
+          ...cpu.cores.map((core) => Card(child: CoreWidget(core: core))),
         ],
       ),
     );
