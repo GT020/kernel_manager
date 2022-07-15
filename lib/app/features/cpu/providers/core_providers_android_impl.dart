@@ -10,14 +10,14 @@ class CoreProviderAndroid implements CoreProviders {
   );
 
   @override
-  Future<List<int>> getAvailableFrequencies(int coreNumber) async {
+  Future<List<double>> getAvailableFrequencies(int coreNumber) async {
     String availableFrequencies = await ReadUtil.ioRead(
         '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_available_frequencies');
-    List<int> intF = [];
+    List<double> intF = [];
 
     List<String> a = availableFrequencies.trim().split(" ");
     for (String freq in a) {
-      intF.add(int.parse(freq));
+      intF.add(double.parse(freq));
     }
     return intF;
   }

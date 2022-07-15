@@ -34,33 +34,31 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: StreamBuilder<String>(
-          builder: (context, snap) {
-            if (snap.hasData) {
-              if (last10Frequencies.length > 10) {
-                last10Frequencies.removeFirst();
-              }
-              last10Frequencies.add(double.parse(snap.requireData));
-              return GridPaper(
-                child: CustomPaint(
-                  size: Size(width, height),
-                  painter: FrequencyGraphPainter(
-                      color: color,
-                      freqs: last10Frequencies,
-                      maxF: (maxFrequency).toDouble()),
-                ),
-              );
+    return StreamBuilder<String>(
+        builder: (context, snap) {
+          if (snap.hasData) {
+            if (last10Frequencies.length > 10) {
+              last10Frequencies.removeFirst();
             }
+            last10Frequencies.add(double.parse(snap.requireData));
             return GridPaper(
-              child: SizedBox(
-                height: height,
-                width: width,
+              child: CustomPaint(
+                size: Size(width, height),
+                painter: FrequencyGraphPainter(
+                    color: color,
+                    freqs: last10Frequencies,
+                    maxF: (maxFrequency).toDouble()),
               ),
             );
-          },
-          stream: currentFrequencyStream),
-    );
+          }
+          return GridPaper(
+            child: SizedBox(
+              height: height,
+              width: width,
+            ),
+          );
+        },
+        stream: currentFrequencyStream);
   }
 }
 

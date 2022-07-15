@@ -41,7 +41,7 @@ class _CoreWidgetState extends State<CoreWidget> {
             height: 30,
             width: 80,
             currentFrequencyStream: frequencyStream,
-            maxFrequency: widget.core.availableFrequencies.last.toDouble()),
+            maxFrequency: widget.core.availableFrequencies.last),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),

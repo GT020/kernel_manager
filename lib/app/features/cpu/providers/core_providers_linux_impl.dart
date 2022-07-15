@@ -3,7 +3,7 @@ import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers
 
 class CoreProviderLinux implements CoreProviders {
   @override
-  Future<List<int>> getAvailableFrequencies(int coreNumber) {
+  Future<List<double>> getAvailableFrequencies(int coreNumber) {
     // TODO: implement getAvailableFrequencies
     throw UnimplementedError();
   }
