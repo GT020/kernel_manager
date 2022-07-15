@@ -9,15 +9,16 @@ class BatteryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Card(
-          child: Text(battery.technology),
+          child: Text("Battery Technology : ${battery.technology}"),
         ),
         Card(
-          child: Text(battery.health),
+          child: Text("Battery Health : ${battery.health}"),
         ),
         Card(
-          child: Text(battery.totalCapacity),
+          child: Text("Battery TotalCapacity : ${battery.totalCapacity}"),
         ),
         Card(
           child: BatteryPercentageWidget(
