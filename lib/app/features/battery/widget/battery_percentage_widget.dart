@@ -4,7 +4,7 @@ import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final batteryPercentageProvider =
     StreamProvider.family<String, String>((ref, percentageNode) {
-  return ReadUtil.readStream(percentageNode);
+  return ReadUtil.readStream(percentageNode, interval: 5000);
 });
 
 class BatteryPercentageWidget extends ConsumerWidget {
