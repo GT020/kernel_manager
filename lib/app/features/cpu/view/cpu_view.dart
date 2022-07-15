@@ -5,7 +5,7 @@ import 'package:penguin_kernel_manager/app/features/cpu/repository/cpu_repositor
 import 'package:penguin_kernel_manager/app/features/cpu/widget/cpu_widget.dart';
 
 final FutureProvider<CpuModel> cpuProvider = FutureProvider((ref) {
-  return CpuRepositoryImpl().getCpu();
+  return ref.read(cpuRepositoryProvider).getCpu();
 });
 
 class CpuView extends ConsumerWidget {

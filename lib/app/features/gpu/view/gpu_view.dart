@@ -4,7 +4,7 @@ import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/repository/gpu_repository_impl.dart';
 
 final FutureProvider<GpuModel> gpuProvider = FutureProvider((ref) {
-  return GpuRepositoryImpl().getGpu();
+  return ref.read(gpuRepositoryProvider).getGpu();
 });
 
 class GpuView extends ConsumerWidget {
