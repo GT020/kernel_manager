@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:penguin_kernel_manager/app/features/battery/view/battery_view.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/view/cpu_view.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/view/gpu_view.dart';
 
@@ -33,6 +34,14 @@ class HomeView extends ConsumerWidget {
                 context.push(GpuView.routeName);
               },
               child: const Text('Go to GPU')),
+          const SizedBox(
+            height: 10,
+          ),
+          TextButton(
+              onPressed: () {
+                context.push(BatteryView.routeName);
+              },
+              child: const Text('Go to Battery')),
         ],
       ),
     );
