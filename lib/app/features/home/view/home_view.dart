@@ -17,33 +17,46 @@ class HomeView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Wrap(
         children: [
-          TextButton(
+          MaterialButton(
             onPressed: () {
               context.push(CpuView.routeName);
             },
-            child: const Text('Go to CPU'),
+            child: const Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('CPU'),
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          TextButton(
+          MaterialButton(
             onPressed: () {
               context.push(GpuView.routeName);
             },
-            child: const Text('Go to GPU'),
+            child: const Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('GPU'),
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          TextButton(
+          MaterialButton(
             onPressed: () {
               context.push(BatteryView.routeName);
             },
-            child: const Text('Go to Battery'),
+            child: const Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Battery'),
+              ),
+            ),
           ),
         ],
       ),
