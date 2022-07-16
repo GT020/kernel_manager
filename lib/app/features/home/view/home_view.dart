@@ -7,12 +7,12 @@ import 'package:penguin_kernel_manager/app/features/gpu/view/gpu_view.dart';
 
 class HomeView extends ConsumerWidget {
   /// Home View
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({final Key? key}) : super(key: key);
 
   static const routeName = '/';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -22,26 +22,29 @@ class HomeView extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextButton(
-              onPressed: () {
-                context.push(CpuView.routeName);
-              },
-              child: const Text('Go to CPU')),
+            onPressed: () {
+              context.push(CpuView.routeName);
+            },
+            child: const Text('Go to CPU'),
+          ),
           const SizedBox(
             height: 10,
           ),
           TextButton(
-              onPressed: () {
-                context.push(GpuView.routeName);
-              },
-              child: const Text('Go to GPU')),
+            onPressed: () {
+              context.push(GpuView.routeName);
+            },
+            child: const Text('Go to GPU'),
+          ),
           const SizedBox(
             height: 10,
           ),
           TextButton(
-              onPressed: () {
-                context.push(BatteryView.routeName);
-              },
-              child: const Text('Go to Battery')),
+            onPressed: () {
+              context.push(BatteryView.routeName);
+            },
+            child: const Text('Go to Battery'),
+          ),
         ],
       ),
     );

@@ -4,25 +4,27 @@ import 'package:penguin_kernel_manager/app/features/battery/widget/battery_perce
 
 class BatteryWidget extends StatelessWidget {
   final BatteryModel battery;
-  const BatteryWidget({Key? key, required this.battery}) : super(key: key);
+  const BatteryWidget({final Key? key, required this.battery})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Card(
-          child: Text("Battery Technology : ${battery.technology}"),
+          child: Text('Battery Technology : ${battery.technology}'),
         ),
         Card(
-          child: Text("Battery Health : ${battery.health}"),
+          child: Text('Battery Health : ${battery.health}'),
         ),
         Card(
-          child: Text("Battery TotalCapacity : ${battery.totalCapacity}"),
+          child: Text('Battery TotalCapacity : ${battery.totalCapacity}'),
         ),
         Card(
           child: BatteryPercentageWidget(
-              batteryPercentageNode: battery.percentageNode),
+            batteryPercentageNode: battery.percentageNode,
+          ),
         ),
       ],
     );

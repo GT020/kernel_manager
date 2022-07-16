@@ -1,6 +1,6 @@
 import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
 
-class GpuProvidersLinux implements GpuProviders{
+class GpuProvidersLinux implements GpuProviders {
   @override
   Future<List<int>> getGpuAvailableFrequencies() {
     // TODO: implement getGpuAvailableFrequencies

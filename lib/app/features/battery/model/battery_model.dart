@@ -9,12 +9,13 @@ class BatteryModel {
   final String statusNode;
 
   BatteryModel(
-      this.technology,
-      this.health,
-      this.totalCapacity,
-      this.temperatureNode,
-      this.currentNode,
-      this.voltageNode,
-      this.percentageNode,
-      this.statusNode);
+    this.technology,
+    this.health,
+    this.totalCapacity,
+    this.temperatureNode,
+    this.currentNode,
+    this.voltageNode,
+    this.percentageNode,
+    this.statusNode,
+  );
 }

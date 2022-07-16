@@ -6,6 +6,11 @@ class CpuCore {
   final List<double> availableFrequencies;
   final List<String> availableGovernor;
   final List<CoreStateModel> state;
-  CpuCore(this.availableFrequencies, this.coreNumber, this.currentFrequencyNode,
-      this.availableGovernor, this.state);
+  CpuCore(
+    this.availableFrequencies,
+    this.coreNumber,
+    this.currentFrequencyNode,
+    this.availableGovernor,
+    this.state,
+  );
 }

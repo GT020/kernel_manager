@@ -4,30 +4,32 @@ import 'package:penguin_kernel_manager/app/features/battery/model/battery_model.
 import 'package:penguin_kernel_manager/app/features/battery/repository/battery_repository_impl.dart';
 import 'package:penguin_kernel_manager/app/features/battery/widget/battery_widget.dart';
 
-final batteryProvider = FutureProvider<BatteryModel>((ref) async {
+final batteryProvider = FutureProvider<BatteryModel>((final ref) async {
   return await ref.read(batteryRepositoryProvider).getBattery();
 });
 
 class BatteryView extends ConsumerWidget {
-  const BatteryView({Key? key}) : super(key: key);
+  const BatteryView({final Key? key}) : super(key: key);
 
   static const routeName = '/battery';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final AsyncValue<BatteryModel> asyncBattery = ref.watch(batteryProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Battery'),
       ),
       body: asyncBattery.when(
-          data: (battery) {
-            return BatteryWidget(battery: battery);
-          },
-          error: (e, s) {
-            return Text(e.toString());
-          },
-          loading: () => const LinearProgressIndicator()),
+        data: (final battery) {
+          return BatteryWidget(battery: battery);
+        },
+        error: (final e, final s) {
+          return Text(e.toString());
+        },
+        loading: () => const LinearProgressIndicator(),
+      ),
     );
   }
 }

@@ -5,5 +5,5 @@ class GpuModel {
   final List<String> availableGovernors;
 
   GpuModel(this.name, this.currentFrequencyNode, this.availableFrequencies,
-      this.availableGovernors);
+      this.availableGovernors,);
 }

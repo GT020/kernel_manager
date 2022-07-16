@@ -6,12 +6,12 @@ import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 import 'package:rxdart/rxdart.dart';
 
 final liveFrequencyProvider = StreamProvider.family<double, String>(
-  (ref, arg) {
+  (final ref, final arg) {
     final BehaviorSubject<double> subject = BehaviorSubject<double>();
-    Stream stream = ReadUtil.readStream(arg);
-    stream.listen((data) {
+    ReadUtil.readStream(arg).listen((final data) {
       subject.add(double.parse(data));
     });
+
     return subject;
   },
 );
@@ -23,42 +23,46 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
   final double height;
   final double width;
   final Color color;
-  LiveFrequencyGraphWidget(
-      {Key? key,
-      required this.color,
-      required this.height,
-      required this.width,
-      required this.currentFrequencyStream,
-      required this.maxFrequency})
-      : super(key: key);
+  LiveFrequencyGraphWidget({
+    final Key? key,
+    required this.color,
+    required this.height,
+    required this.width,
+    required this.currentFrequencyStream,
+    required this.maxFrequency,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return StreamBuilder<String>(
-        builder: (context, snap) {
-          if (snap.hasData) {
-            if (last10Frequencies.length > 10) {
-              last10Frequencies.removeFirst();
-            }
-            last10Frequencies.add(double.parse(snap.requireData));
-            return GridPaper(
-              child: CustomPaint(
-                size: Size(width, height),
-                painter: FrequencyGraphPainter(
-                    color: color,
-                    freqs: last10Frequencies,
-                    maxF: (maxFrequency).toDouble()),
-              ),
-            );
+      builder: (final context, final snap) {
+        if (snap.hasData) {
+          if (last10Frequencies.length > 10) {
+            last10Frequencies.removeFirst();
           }
+          last10Frequencies.add(double.parse(snap.requireData));
+
           return GridPaper(
-            child: SizedBox(
-              height: height,
-              width: width,
+            child: CustomPaint(
+              size: Size(width, height),
+              painter: FrequencyGraphPainter(
+                color: color,
+                freqs: last10Frequencies,
+                maxF: maxFrequency,
+              ),
             ),
           );
-        },
-        stream: currentFrequencyStream);
+        }
+
+        return GridPaper(
+          child: SizedBox(
+            height: height,
+            width: width,
+          ),
+        );
+      },
+      stream: currentFrequencyStream,
+    );
   }
 }
 
@@ -73,18 +77,21 @@ class FrequencyGraphPainter extends CustomPainter {
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     const strokeWidth = 2.0;
     Offset startingPoint = Offset(0, size.height);
-    double lineLength = size.width / freqs.length;
+    final double lineLength = size.width / freqs.length;
     final backgroundPaint = Paint()
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..color = color;
 
+    // ignore: prefer-correct-identifier-length
     for (int i = 0; i < freqs.length; i++) {
       final double freq = freqs.elementAt(i);
+      // ignore: prefer-correct-identifier-length
       final y = size.height - (freq / maxF) * size.height;
+      // ignore: prefer-correct-identifier-length
       final x = i * lineLength;
 
       if (i == 0) {
@@ -98,7 +105,7 @@ class FrequencyGraphPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) {
     return true;
   }
 }

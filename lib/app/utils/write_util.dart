@@ -6,9 +6,13 @@ class WriteUtil {
   /// [path] - Path of the file to write to
   /// [value] - Value to write to the file
   /// > is used
+  /// and return exit code of the process
 
-  static Future<void> echo(String path, String value) async {
-    await Process.run('echo', [value, '>', path]).then((value) => value.stdout);
+  static Future<int> echo(final String path, final String value) async {
+    final ProcessResult processResult =
+        await Process.run('echo', [value, '>', path]);
+
+    return processResult.exitCode;
   }
 
   /// Write the value to path provided as String using echo command
@@ -16,16 +20,18 @@ class WriteUtil {
   /// [path] - Path of the file to write to
   /// [value] - Value to write to the file
   /// >> is used
+  /// and return exit code of the process
 
-  static Future<void> echoNewLine(String path, String value) async {
-    await Process.run('echo', [value, '>>', path])
-        .then((value) => value.stdout);
+  static Future<int> echoNewLine(final String path, final String value) async {
+    final ProcessResult processResult =
+        await Process.run('echo', [value, '>>', path]);
+
+    return processResult.exitCode;
   }
 
   /// Write the value to path provided as String using dart:io: File
 
-  static void writeUsingFile(String path, String content) {
-    File file = File(path);
-    file.writeAsStringSync(content);
+  static void writeUsingFile(final String path, final String content) {
+    File(path).writeAsStringSync(content);
   }
 }

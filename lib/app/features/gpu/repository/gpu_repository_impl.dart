@@ -5,7 +5,7 @@ import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers_android.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers_linux.dart';
-import 'gpu_repository.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/repository/gpu_repository.dart';
 
 class GpuRepositoryImpl extends GpuRepository {
   late final GpuProviders gpuProviders;
@@ -20,13 +20,14 @@ class GpuRepositoryImpl extends GpuRepository {
   @override
   Future<GpuModel> getGpu() async {
     return GpuModel(
-        await gpuProviders.getGpuName(),
-        await gpuProviders.getGpuCurrentFrequencyNode(),
-        await gpuProviders.getGpuAvailableFrequencies(),
-        await gpuProviders.getGpuAvailableGovernors());
+      await gpuProviders.getGpuName(),
+      await gpuProviders.getGpuCurrentFrequencyNode(),
+      await gpuProviders.getGpuAvailableFrequencies(),
+      await gpuProviders.getGpuAvailableGovernors(),
+    );
   }
 }
 
-final gpuRepositoryProvider = Provider<GpuRepository>((ref) {
+final gpuRepositoryProvider = Provider<GpuRepository>((final ref) {
   return GpuRepositoryImpl();
 });

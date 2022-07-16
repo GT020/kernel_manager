@@ -8,11 +8,12 @@ class CpuModel {
   final List<List<int>> coreStructure;
   final List<CpuCore> cores;
 
-  CpuModel(
-      {required this.numberOfCores,
-      required this.architecture,
-      required this.process,
-      required this.coreStructure,
-      required this.name,
-      required this.cores});
+  CpuModel({
+    required this.numberOfCores,
+    required this.architecture,
+    required this.process,
+    required this.coreStructure,
+    required this.name,
+    required this.cores,
+  });
 }

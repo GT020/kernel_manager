@@ -3,23 +3,24 @@ import 'package:penguin_kernel_manager/app/features/cpu/model/core_state_model.d
 
 class FrequencyHistory extends StatelessWidget {
   final List<CoreStateModel> history;
-  const FrequencyHistory({Key? key, required this.history}) : super(key: key);
+  const FrequencyHistory({final Key? key, required this.history})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
-        ...history.map((coreState) => CustomPaint(
-              size: const Size(double.infinity, 15),
-              painter: FrequencyHistoryBarPainter(
-                fillBarColor: Theme.of(context).primaryColor,
-                coreState: coreState,
-                frequencyTextColor:
-                    Theme.of(context).textTheme.bodyText1!.color,
-                percentageTextColor:
-                    Theme.of(context).textTheme.bodyText2!.color,
-              ),
-            ))
+        ...history.map(
+          (final coreState) => CustomPaint(
+            size: const Size(double.infinity, 15),
+            painter: FrequencyHistoryBarPainter(
+              fillBarColor: Theme.of(context).primaryColor,
+              coreState: coreState,
+              frequencyTextColor: Theme.of(context).textTheme.bodyText1!.color,
+              percentageTextColor: Theme.of(context).textTheme.bodyText2!.color,
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -36,8 +37,12 @@ class FrequencyHistoryBarPainter extends CustomPainter {
     required this.coreState,
     required this.fillBarColor,
   });
+
   @override
-  void paint(Canvas canvas, Size size) {
+
+  // ignore: long-method
+  void paint(final Canvas canvas, final Size size) {
+    //TODO: refactor this method
     final double strokeWidth = size.height - 2;
 
     final backgroundPaint = Paint()
@@ -52,44 +57,57 @@ class FrequencyHistoryBarPainter extends CustomPainter {
 
     final textPainterFrequency = TextPainter(
       text: TextSpan(
-          text: coreState.frequency,
-          style:
-              TextStyle(color: frequencyTextColor, fontSize: strokeWidth - 2)),
+        text: coreState.frequency,
+        style: TextStyle(color: frequencyTextColor, fontSize: strokeWidth - 2),
+      ),
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.center,
       textScaleFactor: 1,
     );
     final textPainterPercentage = TextPainter(
       text: TextSpan(
-          text: '${coreState.percentage.toStringAsFixed(2)} %',
-          style:
-              TextStyle(color: percentageTextColor, fontSize: strokeWidth - 2)),
+        text: '${coreState.percentage.toStringAsFixed(2)} %',
+        style: TextStyle(color: percentageTextColor, fontSize: strokeWidth - 2),
+      ),
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.center,
       textScaleFactor: 1,
     );
-    double startingPoint = 10.0;
-    double endingPoint = size.width - strokeWidth;
+    const double startingPoint = 10.0;
+    final double endingPoint = size.width - strokeWidth;
 
-    double percentageEndpoint =
+    final double percentageEndpoint =
         ((coreState.percentage / 100) * size.width) + 10;
 
-    canvas.drawLine(
-        Offset(startingPoint, 0), Offset(endingPoint, 0), backgroundPaint);
-    canvas.drawLine(Offset(startingPoint, 0), Offset(percentageEndpoint, 0),
-        foregroundPaint);
+    canvas
+      ..drawLine(
+        const Offset(startingPoint, 0),
+        Offset(endingPoint, 0),
+        backgroundPaint,
+      )
+      ..drawLine(
+        const Offset(startingPoint, 0),
+        Offset(percentageEndpoint, 0),
+        foregroundPaint,
+      );
 
-    textPainterFrequency.layout(minWidth: 0, maxWidth: strokeWidth * 5);
-    textPainterFrequency.paint(
-        canvas, Offset(startingPoint, 0 - (strokeWidth / 2)));
+    textPainterFrequency
+      ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
+      ..paint(
+        canvas,
+        Offset(startingPoint, 0 - (strokeWidth / 2)),
+      );
 
-    textPainterPercentage.layout(minWidth: 0, maxWidth: strokeWidth * 5);
-    textPainterPercentage.paint(
-        canvas, Offset(endingPoint - strokeWidth * 3, -strokeWidth / 2));
+    textPainterPercentage
+      ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
+      ..paint(
+        canvas,
+        Offset(endingPoint - strokeWidth * 3, -strokeWidth / 2),
+      );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) {
     return false;
   }
 }

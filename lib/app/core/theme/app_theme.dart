@@ -1,6 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 class AppTheme {
   /// for getting light theme
@@ -26,7 +26,7 @@ class AppTheme {
       surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
       blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
-      appBarOpacity: 0.90,
+      appBarOpacity: 0.9,
       subThemesData: const FlexSubThemesData(
         blendOnLevel: 30,
       ),
@@ -37,4 +37,4 @@ class AppTheme {
 }
 
 /// for providing app theme [AppTheme]
-final appThemeProvider = Provider<AppTheme>((_) => AppTheme());
+final appThemeProvider = Provider<AppTheme>((final _) => AppTheme());

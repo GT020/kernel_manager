@@ -3,29 +3,34 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final batteryPercentageProvider =
-    StreamProvider.family<String, String>((ref, percentageNode) {
+    StreamProvider.family<String, String>((final ref, final percentageNode) {
   return ReadUtil.readStream(percentageNode, interval: 5000);
 });
 
 class BatteryPercentageWidget extends ConsumerWidget {
   final String batteryPercentageNode;
-  const BatteryPercentageWidget({Key? key, required this.batteryPercentageNode})
-      : super(key: key);
+  const BatteryPercentageWidget({
+    final Key? key,
+    required this.batteryPercentageNode,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final AsyncValue<String> asyncBatteryPercentage =
         ref.watch(batteryPercentageProvider(batteryPercentageNode));
+
     return asyncBatteryPercentage.when(
-        data: (percentage) {
-          return CustomPaint(
-              painter: BatteryBarPainter(batteryPercentage: percentage),
-              size: const Size(20, 40));
-        },
-        error: (e, s) {
-          return Text(e.toString());
-        },
-        loading: () => const Text('..'));
+      data: (final percentage) {
+        return CustomPaint(
+          painter: BatteryBarPainter(batteryPercentage: percentage),
+          size: const Size(20, 40),
+        );
+      },
+      error: (final e, final s) {
+        return Text(e.toString());
+      },
+      loading: () => const Text('..'),
+    );
   }
 }
 
@@ -33,7 +38,7 @@ class BatteryBarPainter extends CustomPainter {
   final String batteryPercentage;
   BatteryBarPainter({required this.batteryPercentage});
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     final double strokeWidth = size.height / 2;
     final Offset startingPoint = Offset(strokeWidth, strokeWidth);
     final length = size.width * (double.parse(batteryPercentage) / 100);
@@ -63,12 +68,13 @@ class BatteryBarPainter extends CustomPainter {
 
     canvas.drawLine(startingPoint, endingPoint, paint);
 
-    textPainter.layout(minWidth: 0, maxWidth: strokeWidth * 5);
-    textPainter.paint(canvas, Offset(strokeWidth, strokeWidth / 2));
+    textPainter
+      ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
+      ..paint(canvas, Offset(strokeWidth, strokeWidth / 2));
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) {
     return true;
   }
 }

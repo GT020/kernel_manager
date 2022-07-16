@@ -3,30 +3,32 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/repository/gpu_repository_impl.dart';
 
-final FutureProvider<GpuModel> gpuProvider = FutureProvider((ref) {
+final FutureProvider<GpuModel> gpuProvider = FutureProvider((final ref) {
   return ref.read(gpuRepositoryProvider).getGpu();
 });
 
 class GpuView extends ConsumerWidget {
-  const GpuView({Key? key}) : super(key: key);
+  const GpuView({final Key? key}) : super(key: key);
 
   static const routeName = '/gpu';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final AsyncValue<GpuModel> asyncGpu = ref.watch(gpuProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('GPU'),
       ),
       body: asyncGpu.when(
-          data: (gpu) {
-            return Text(gpu.name);
-          },
-          error: (e, s) {
-            return Text(e.toString());
-          },
-          loading: () => const LinearProgressIndicator()),
+        data: (final gpu) {
+          return Text(gpu.name);
+        },
+        error: (final e, final s) {
+          return Text(e.toString());
+        },
+        loading: () => const LinearProgressIndicator(),
+      ),
     );
   }
 }
