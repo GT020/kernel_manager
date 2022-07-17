@@ -29,6 +29,8 @@ class BatteryRepositoryImpl extends BatteryRepository {
       await batteryProviders.getVoltageNode(),
       await batteryProviders.getPercentageNode(),
       await batteryProviders.getStatusNode(),
+      await batteryProviders.getCurrentMax(),
+      await batteryProviders.getVoltageMax(),
     );
   }
 }
