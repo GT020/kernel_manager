@@ -19,17 +19,15 @@ class BatteryPercentageWidget extends ConsumerWidget {
     final AsyncValue<String> asyncBatteryPercentage =
         ref.watch(batteryPercentageProvider(batteryPercentageNode));
 
-    return asyncBatteryPercentage.when(
-      data: (final percentage) {
-        return CustomPaint(
-          painter: BatteryBarPainter(batteryPercentage: percentage),
-          size: const Size(20, 40),
-        );
-      },
-      error: (final e, final s) {
-        return Text(e.toString());
-      },
-      loading: () => const Text('..'),
+    return CustomPaint(
+      painter: BatteryBarPainter(
+        batteryPercentage: asyncBatteryPercentage.when(
+          data: (final data) => '0',
+          error: (final e, final s) => '0',
+          loading: () => '0',
+        ),
+      ),
+      size: const Size(20, 20),
     );
   }
 }
@@ -39,9 +37,10 @@ class BatteryBarPainter extends CustomPainter {
   BatteryBarPainter({required this.batteryPercentage});
   @override
   void paint(final Canvas canvas, final Size size) {
+    final double percentage = double.parse(batteryPercentage) / 100;
     final double strokeWidth = size.height / 2;
     final Offset startingPoint = Offset(strokeWidth, strokeWidth);
-    final length = size.width * (double.parse(batteryPercentage) / 100);
+    final length = size.width * percentage;
     final Offset endingPoint = Offset(length - strokeWidth, strokeWidth);
     final paint = Paint()
       ..strokeWidth = strokeWidth
