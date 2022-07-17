@@ -22,7 +22,7 @@ class BatteryPercentageWidget extends ConsumerWidget {
     return CustomPaint(
       painter: BatteryBarPainter(
         batteryPercentage: asyncBatteryPercentage.when(
-          data: (final data) => '0',
+          data: (final data) => data,
           error: (final e, final s) => '0',
           loading: () => '0',
         ),
