@@ -8,7 +8,7 @@ class GpuProvidersAndroid implements GpuProviders {
     final List<int> intF = [];
 
     try {
-      final String availableFrequencies = await ReadUtil.ioRead(
+      final String availableFrequencies = await ReadUtil.cat(
         '/sys/class/kgsl/kgsl-3d0/gpu_available_frequencies',
       );
 
@@ -28,7 +28,7 @@ class GpuProvidersAndroid implements GpuProviders {
   @override
   Future<List<String>> getGpuAvailableGovernors() async {
     try {
-      final List<String> availableGovernor = (await ReadUtil.ioRead(
+      final List<String> availableGovernor = (await ReadUtil.cat(
         '/sys/class/kgsl/kgsl-3d0/devfreq/available_governors',
       ))
           .split(' ');
