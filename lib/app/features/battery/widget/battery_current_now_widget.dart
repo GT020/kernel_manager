@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final currentNowStreamProvider = StreamProvider.family<String, String>(
@@ -48,7 +49,7 @@ class BatteryCurrentBarPainter extends CustomPainter {
       text: currentNow,
       style: const TextStyle(
         fontSize: 10,
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }
@@ -56,7 +57,10 @@ class BatteryCurrentBarPainter extends CustomPainter {
   @override
   void paint(final Canvas canvas, final Size size) {
     final current = double.parse(currentNow);
-    final Color color = current > 0 ? Colors.red : Colors.green;
+    final Color color = current > 0 ? appOrange : appGreenYellow;
+    if (current == 0) {
+      return;
+    }
     final currentPercentage = (current.abs() / currentMax) * 100;
     final strokeWidth = size.height / 2;
     final length = size.width * currentPercentage;

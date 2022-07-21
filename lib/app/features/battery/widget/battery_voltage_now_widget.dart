@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final voltageNowStreamProvider = StreamProvider.family<String, String>(
@@ -48,7 +49,7 @@ class BatteryVoltageBarPainter extends CustomPainter {
       text: voltageNow,
       style: const TextStyle(
         fontSize: 10,
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }
@@ -56,8 +57,10 @@ class BatteryVoltageBarPainter extends CustomPainter {
   @override
   void paint(final Canvas canvas, final Size size) {
     final voltage = double.parse(voltageNow);
-
-    final Color color = voltage < 0 ? Colors.red : Colors.green;
+    if (voltage == 0) {
+      return;
+    }
+    final Color color = voltage < 0 ? appOrange : appGreenYellow;
     final voltagePercentage = voltage.abs() / voltageMax;
     final strokeWidth = size.height / 2;
     final length = size.width * voltagePercentage;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final batteryPercentageProvider =
@@ -38,6 +39,9 @@ class BatteryBarPainter extends CustomPainter {
   @override
   void paint(final Canvas canvas, final Size size) {
     final double percentage = double.parse(batteryPercentage) / 100;
+    if (batteryPercentage == '0') {
+      return;
+    }
     final double strokeWidth = size.height / 2;
     final Offset startingPoint = Offset(strokeWidth, strokeWidth);
     final length = size.width * percentage;
@@ -47,9 +51,8 @@ class BatteryBarPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..shader = const LinearGradient(
         colors: [
-          Colors.red,
-          Colors.yellow,
-          Colors.green,
+          appOrange,
+          appGreenYellow,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -58,7 +61,7 @@ class BatteryBarPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         text: batteryPercentage,
-        style: TextStyle(fontSize: strokeWidth, color: Colors.white),
+        style: TextStyle(fontSize: strokeWidth, color: Colors.black),
       ),
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.left,

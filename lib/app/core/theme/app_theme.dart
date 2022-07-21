@@ -1,53 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-const Color appGreen = Color(0xFFDCFC34);
-const Color appBlue = Color(0xFF21E8E4);
+const Color appGreenYellow = Color(0xFFB6FF00);
+const Color appLightBlue = Color(0xFF21E8E4);
 const Color appLightGray = Color(0xFF4B4C5A);
 const Color appDarkGray = Color(0xFF2F2F3D);
+const Color appViolet = Color(0xFF7E52FF);
+const Color appArsenic = Color(0xFF242834);
+const Color appOrange = Color(0xFFFF5B28);
+const Color appIrisPurple = Color(0xFF4E4AC6);
+const Color appSeaBlue = Color(0xFF43A1ED);
 
 class AppTheme {
   final newDarkThemeData = ThemeData(
     useMaterial3: true,
-    primaryTextTheme: const TextTheme(
-      headline1: TextStyle(
-        color: appBlue,
-      ),
-      headline2: TextStyle(
-        color: appBlue,
-      ),
-      headline3: TextStyle(
-        color: appBlue,
-      ),
-      headline4: TextStyle(
-        color: appBlue,
-      ),
-      headline5: TextStyle(
-        color: appBlue,
-      ),
-      headline6: TextStyle(
-        color: appBlue,
-      ),
-      subtitle1: TextStyle(
-        color: appBlue,
-      ),
-      subtitle2: TextStyle(
-        color: appBlue,
-      ),
-      bodyText1: TextStyle(
-        color: appBlue,
-      ),
-      bodyText2: TextStyle(
-        color: appBlue,
-      ),
-      button: TextStyle(
-        color: appBlue,
-      ),
-      caption: TextStyle(
-        color: appBlue,
-      ),
+    textTheme: const TextTheme(
+      headline1: TextStyle(color: Colors.white),
+      headline2: TextStyle(color: Colors.white),
+      headline3: TextStyle(color: Colors.white),
+      headline4: TextStyle(color: Colors.white),
+      headline5: TextStyle(color: Colors.white),
+      headline6: TextStyle(color: Colors.white),
+      subtitle1: TextStyle(color: Colors.white),
+      subtitle2: TextStyle(color: Colors.white),
+      bodyText1: TextStyle(color: Colors.white),
+      bodyText2: TextStyle(color: Colors.white),
+      caption: TextStyle(color: Colors.white),
+      button: TextStyle(color: Colors.white),
+      overline: TextStyle(color: Colors.white),
     ),
-    primaryColor: appGreen,
+    primaryColor: appGreenYellow,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: appLightGray,
     appBarTheme: const AppBarTheme(
@@ -58,6 +40,10 @@ class AppTheme {
       clipBehavior: Clip.antiAlias,
       color: appDarkGray,
       elevation: 2,
+    ),
+    buttonTheme: const ButtonThemeData(
+      buttonColor: appGreenYellow,
+      textTheme: ButtonTextTheme.primary,
     ),
   );
 
