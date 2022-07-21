@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
-import 'package:penguin_kernel_manager/app/utils/root_utils.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_frequency_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_governor_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_live_frequency_widget.dart';
 
-final gpuFrequencyStreamProvider =
-    StreamProvider.family<String, String>((final ref, final gpuFrequencyNode) {
-  return RootUtils.catStream(
-    gpuFrequencyNode,
-    interval: 1,
-  );
-});
-
-class GpuWidget extends ConsumerWidget {
+class GpuWidget extends StatelessWidget {
   final GpuModel gpu;
 
   /// Gpu Widget
@@ -21,21 +14,26 @@ class GpuWidget extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
-    final AsyncValue<String> asyncGpuFrequency =
-        ref.watch(gpuFrequencyStreamProvider(gpu.currentFrequencyNode));
-
+  Widget build(final BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          asyncGpuFrequency.when(
-            data: (final gpuFrequency) => gpuFrequency,
-            error: (final e, final s) => e.toString(),
-            loading: () => 'Loading...',
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Gpu : ${gpu.name}'),
           ),
         ),
-        Text(gpu.availableGovernors.join(', ')),
-        Text(gpu.availableFrequencies.join(', ')),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GpuLiveFrequencyWidget(
+              gpuCurrentFrequencyNode: gpu.currentFrequencyNode,
+            ),
+          ),
+        ),
+        GpuFrequencyWidget(availableFrequencies: gpu.availableFrequencies),
+        GpuGovernorWidget(availableGovernors: gpu.availableGovernors),
       ],
     );
   }
