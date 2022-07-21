@@ -1,38 +1,73 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+const Color appGreen = Color(0xFFDCFC34);
+const Color appBlue = Color(0xFF21E8E4);
+const Color appLightGray = Color(0xFF4B4C5A);
+const Color appDarkGray = Color(0xFF2F2F3D);
+
 class AppTheme {
-  /// for getting light theme
-  ThemeData get lightTheme {
-    return FlexThemeData.light(
-      scheme: FlexScheme.material,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      blendLevel: 20,
-      appBarOpacity: 0.95,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 20,
-        blendOnColors: false,
+  final newDarkThemeData = ThemeData(
+    useMaterial3: true,
+    primaryTextTheme: const TextTheme(
+      headline1: TextStyle(
+        color: appBlue,
       ),
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
-    );
+      headline2: TextStyle(
+        color: appBlue,
+      ),
+      headline3: TextStyle(
+        color: appBlue,
+      ),
+      headline4: TextStyle(
+        color: appBlue,
+      ),
+      headline5: TextStyle(
+        color: appBlue,
+      ),
+      headline6: TextStyle(
+        color: appBlue,
+      ),
+      subtitle1: TextStyle(
+        color: appBlue,
+      ),
+      subtitle2: TextStyle(
+        color: appBlue,
+      ),
+      bodyText1: TextStyle(
+        color: appBlue,
+      ),
+      bodyText2: TextStyle(
+        color: appBlue,
+      ),
+      button: TextStyle(
+        color: appBlue,
+      ),
+      caption: TextStyle(
+        color: appBlue,
+      ),
+    ),
+    primaryColor: appGreen,
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: appLightGray,
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      color: appLightGray,
+    ),
+    cardTheme: const CardTheme(
+      clipBehavior: Clip.antiAlias,
+      color: appDarkGray,
+      elevation: 2,
+    ),
+  );
+
+  ThemeData get lightTheme {
+    return newDarkThemeData;
   }
 
   /// for getting dark theme
   ThemeData get darkTheme {
-    return FlexThemeData.dark(
-      scheme: FlexScheme.material,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      blendLevel: 15,
-      appBarStyle: FlexAppBarStyle.background,
-      appBarOpacity: 0.9,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 30,
-      ),
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
-    );
+    return newDarkThemeData;
   }
 }
 
