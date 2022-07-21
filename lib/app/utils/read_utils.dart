@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:penguin_kernel_manager/app/utils/root_utils.dart';
 
+//TODO: implement root to all read functions
+
 class ReadUtil {
   /// Stream the value of path provided as String using cat command
   static Stream<String> catStream(
@@ -28,7 +30,7 @@ class ReadUtil {
     // ignore: avoid_catches_without_on_clauses
     catch (e) {
       //cat with root if exception occurs
-      final String result = await RootUtils.cat(path);
+      final String result = await RootShell.cat(path);
 
       return result;
     }
