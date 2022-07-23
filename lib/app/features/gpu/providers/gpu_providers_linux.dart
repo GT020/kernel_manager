@@ -24,4 +24,16 @@ class GpuProvidersLinux implements GpuProviders {
     // TODO: implement getGpuName
     throw UnimplementedError();
   }
+
+  @override
+  Future<double> getMaxFrequency() {
+    // TODO: implement getMaxFrequency
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<double> getMinFrequency() {
+    // TODO: implement getMinFrequency
+    throw UnimplementedError();
+  }
 }

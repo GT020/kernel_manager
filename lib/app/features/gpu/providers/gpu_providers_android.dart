@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
+import 'package:penguin_kernel_manager/app/utils/root_utils.dart';
 
 class GpuProvidersAndroid implements GpuProviders {
   @override
@@ -48,5 +49,21 @@ class GpuProvidersAndroid implements GpuProviders {
   @override
   Future<String> getGpuName() {
     return ReadUtil.ioRead('/sys/kernel/gpu/gpu_model');
+  }
+
+  @override
+  Future<double> getMaxFrequency() async {
+    final maxFrequency =
+        await RootShell.cat('/sys/class/kgsl/kgsl-3d0/max_gpuclk');
+
+    return double.parse(maxFrequency);
+  }
+
+  @override
+  Future<double> getMinFrequency() async {
+    final minFrequency =
+        await RootShell.cat('/sys/class/kgsl/kgsl-3d0/devfreq/min_freq');
+
+    return double.parse(minFrequency);
   }
 }

@@ -24,6 +24,8 @@ class GpuRepositoryImpl extends GpuRepository {
       await gpuProviders.getGpuCurrentFrequencyNode(),
       await gpuProviders.getGpuAvailableFrequencies(),
       await gpuProviders.getGpuAvailableGovernors(),
+      await gpuProviders.getMinFrequency(),
+      await gpuProviders.getMaxFrequency(),
     );
   }
 }
