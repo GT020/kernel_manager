@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/model/core_state_model.dart';
 import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 class CoreProviderAndroid implements CoreProviders {
+  static const MethodChannel channel = MethodChannel('penguin_kernel_manager');
+
   RegExp frequencyRegex = RegExp(
     r'![\d+]',
   );
@@ -76,6 +79,12 @@ class CoreProviderAndroid implements CoreProviders {
       final double percentage = time / totalUptime;
       coreStates.add(CoreStateModel(freq, time, percentage));
     }
+    //add deep sleep too
+    final double deepSleep = await getDeepSleep();
+    final double deepSleepPercentage = deepSleep / totalUptime;
+    coreStates
+        .add(CoreStateModel('Deep Sleep', deepSleep, deepSleepPercentage));
+
     // return the list of coreStates
 
     return coreStates;
@@ -94,5 +103,12 @@ class CoreProviderAndroid implements CoreProviders {
     uptime = currentDate.difference(uptimeDateTime).inSeconds.toDouble();
 
     return uptime;
+  }
+
+  Future<double> getDeepSleep() async {
+    final int deepSleep =
+        (await channel.invokeMethod<int>('getDeepSleep')) ?? 0;
+
+    return deepSleep.toDouble();
   }
 }
