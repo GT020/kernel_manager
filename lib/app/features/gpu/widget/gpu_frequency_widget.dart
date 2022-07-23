@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GpuFrequencyWidget extends StatelessWidget {
-  final List<int> availableFrequencies;
+  final List<double> availableFrequencies;
 
   const GpuFrequencyWidget({final Key? key, required this.availableFrequencies})
       : super(key: key);

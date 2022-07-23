@@ -4,8 +4,8 @@ import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 class GpuProvidersAndroid implements GpuProviders {
   @override
-  Future<List<int>> getGpuAvailableFrequencies() async {
-    final List<int> intF = [];
+  Future<List<double>> getGpuAvailableFrequencies() async {
+    final List<double> intF = [];
 
     try {
       final String availableFrequencies = await ReadUtil.cat(
@@ -15,7 +15,7 @@ class GpuProvidersAndroid implements GpuProviders {
       final List<String> availableFrequenciesList =
           availableFrequencies.trim().split(' ');
       for (final String freq in availableFrequenciesList) {
-        intF.add(int.parse(freq));
+        intF.add(double.parse(freq));
       }
       // ignore: avoid_catches_without_on_clauses
     } catch (e) {

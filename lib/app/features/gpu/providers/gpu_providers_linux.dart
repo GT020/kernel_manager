@@ -2,7 +2,7 @@ import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.
 
 class GpuProvidersLinux implements GpuProviders {
   @override
-  Future<List<int>> getGpuAvailableFrequencies() {
+  Future<List<double>> getGpuAvailableFrequencies() {
     // TODO: implement getGpuAvailableFrequencies
     throw UnimplementedError();
   }
