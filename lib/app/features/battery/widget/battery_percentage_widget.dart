@@ -23,7 +23,8 @@ class BatteryPercentageWidget extends ConsumerWidget {
         ref.watch(batteryPercentageProvider(batteryPercentageNode));
 
     return CustomPaint(
-      painter: BatteryPercentageCircularPainter(
+      painter: BatteryPercentageBackgroundPainter(),
+      foregroundPainter: BatteryPercentageForegroundPainter(
         asyncBatteryPercentage.value ?? '0',
       ),
       size: const Size(150, 150),
@@ -31,58 +32,31 @@ class BatteryPercentageWidget extends ConsumerWidget {
   }
 }
 
-class BatteryBarPainter extends CustomPainter {
-  final String batteryPercentage;
-  BatteryBarPainter({required this.batteryPercentage});
+class BatteryPercentageBackgroundPainter extends CustomPainter {
   @override
   void paint(final Canvas canvas, final Size size) {
-    final double percentage = double.parse(batteryPercentage) / 100;
-    if (batteryPercentage == '0') {
-      return;
-    }
-    final double strokeWidth = size.height / 2;
-    final Offset startingPoint = Offset(strokeWidth, strokeWidth);
-    final length = size.width * percentage;
-    final Offset endingPoint = Offset(length - strokeWidth, strokeWidth);
-    final paint = Paint()
+    final double strokeWidth = size.height / 40;
+    final radius = size.height / 2.5;
+    final center = Offset(size.width / 2, size.height / 2);
+    final backgroundPaint = Paint()
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
-      ..shader = const LinearGradient(
-        colors: [
-          appOrange,
-          appGreenYellow,
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ).createShader(Rect.fromLTRB(0, 0, size.width, 0));
+      ..style = PaintingStyle.stroke
+      ..color = appLightBlue;
 
-    final textPainter = TextPainter(
-      text: TextSpan(
-        text: batteryPercentage,
-        style: TextStyle(fontSize: strokeWidth, color: Colors.black),
-      ),
-      textDirection: TextDirection.ltr,
-      textAlign: TextAlign.left,
-      textScaleFactor: 1,
-    );
-
-    canvas.drawLine(startingPoint, endingPoint, paint);
-
-    textPainter
-      ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
-      ..paint(canvas, Offset(strokeWidth, strokeWidth / 2));
+    canvas.drawCircle(center, radius, backgroundPaint);
   }
 
   @override
   bool shouldRepaint(covariant final CustomPainter oldDelegate) {
-    return true;
+    return false;
   }
 }
 
-class BatteryPercentageCircularPainter extends CustomPainter {
+class BatteryPercentageForegroundPainter extends CustomPainter {
   final String batteryPercentage;
 
-  BatteryPercentageCircularPainter(this.batteryPercentage);
+  BatteryPercentageForegroundPainter(this.batteryPercentage);
   @override
   void paint(final Canvas canvas, final Size size) {
     if (batteryPercentage == '0') {
@@ -93,14 +67,6 @@ class BatteryPercentageCircularPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final double fontSize = size.height / 10;
     final double strokeWidth = size.height / 20;
-
-    final backgroundPaint = Paint()
-      ..strokeWidth = strokeWidth / 2
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..color = appLightBlue;
-
-    canvas.drawCircle(center, radius, backgroundPaint);
 
     final foregroundPaint = Paint()
       ..strokeWidth = strokeWidth
