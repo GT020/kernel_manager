@@ -18,6 +18,8 @@ class BatteryWidget extends StatelessWidget {
           children: [
             Card(
               child: BatteryPercentageWidget(
+                height: 150,
+                width: 150,
                 batteryPercentageNode: battery.percentageNode,
               ),
             ),

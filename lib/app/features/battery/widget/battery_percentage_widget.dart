@@ -11,10 +11,14 @@ final batteryPercentageProvider =
 });
 
 class BatteryPercentageWidget extends ConsumerWidget {
+  final double height;
+  final double width;
   final String batteryPercentageNode;
   const BatteryPercentageWidget({
     final Key? key,
     required this.batteryPercentageNode,
+    required this.height,
+    required this.width,
   }) : super(key: key);
 
   @override
@@ -27,7 +31,7 @@ class BatteryPercentageWidget extends ConsumerWidget {
       foregroundPainter: BatteryPercentageForegroundPainter(
         asyncBatteryPercentage.value ?? '0',
       ),
-      size: const Size(150, 150),
+      size: Size(width, height),
     );
   }
 }
