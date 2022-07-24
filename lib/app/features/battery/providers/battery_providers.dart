@@ -7,4 +7,6 @@ abstract class BatteryProviders {
   Future<String> getVoltageNode();
   Future<String> getPercentageNode();
   Future<String> getStatusNode();
+  Future<double> getCurrentMax();
+  Future<double> getVoltageMax();
 }

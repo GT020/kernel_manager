@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:penguin_kernel_manager/app/features/battery/model/battery_model.dart';
+import 'package:penguin_kernel_manager/app/features/battery/widget/battery_current_now_widget.dart';
 import 'package:penguin_kernel_manager/app/features/battery/widget/battery_percentage_widget.dart';
+import 'package:penguin_kernel_manager/app/features/battery/widget/battery_voltage_now_widget.dart';
 
 class BatteryWidget extends StatelessWidget {
   final BatteryModel battery;
@@ -10,20 +12,50 @@ class BatteryWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Card(
-          child: Text('Battery Technology : ${battery.technology}'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Card(
+              child: BatteryPercentageWidget(
+                batteryPercentageNode: battery.percentageNode,
+              ),
+            ),
+            SizedBox(
+              height: 150,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Battery Technology : ${battery.technology}'),
+                      Text('Battery Health : ${battery.health}'),
+                      Text('Battery TotalCapacity : ${battery.totalCapacity}'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         Card(
-          child: Text('Battery Health : ${battery.health}'),
+          child: Text('Max Current : ${battery.currentMax}'),
         ),
         Card(
-          child: Text('Battery TotalCapacity : ${battery.totalCapacity}'),
+          child: BatteryCurrentNowWidget(
+            currentNowNode: battery.currentNode,
+            currentMax: battery.currentMax,
+          ),
         ),
         Card(
-          child: BatteryPercentageWidget(
-            batteryPercentageNode: battery.percentageNode,
+          child: Text('Max Voltage : ${battery.voltageMax}'),
+        ),
+        Card(
+          child: BatteryVoltageNowWidget(
+            voltageNowNode: battery.voltageNode,
+            voltageMax: battery.voltageMax,
           ),
         ),
       ],

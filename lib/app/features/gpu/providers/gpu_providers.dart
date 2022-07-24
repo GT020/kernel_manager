@@ -1,6 +1,8 @@
 abstract class GpuProviders {
   Future<String> getGpuName();
   Future<String> getGpuCurrentFrequencyNode();
-  Future<List<int>> getGpuAvailableFrequencies();
+  Future<double> getMinFrequency();
+  Future<double> getMaxFrequency();
+  Future<List<double>> getGpuAvailableFrequencies();
   Future<List<String>> getGpuAvailableGovernors();
 }

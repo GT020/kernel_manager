@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final batteryPercentageProvider =
@@ -19,17 +22,11 @@ class BatteryPercentageWidget extends ConsumerWidget {
     final AsyncValue<String> asyncBatteryPercentage =
         ref.watch(batteryPercentageProvider(batteryPercentageNode));
 
-    return asyncBatteryPercentage.when(
-      data: (final percentage) {
-        return CustomPaint(
-          painter: BatteryBarPainter(batteryPercentage: percentage),
-          size: const Size(20, 40),
-        );
-      },
-      error: (final e, final s) {
-        return Text(e.toString());
-      },
-      loading: () => const Text('..'),
+    return CustomPaint(
+      painter: BatteryPercentageCircularPainter(
+        asyncBatteryPercentage.value ?? '0',
+      ),
+      size: const Size(150, 150),
     );
   }
 }
@@ -39,18 +36,21 @@ class BatteryBarPainter extends CustomPainter {
   BatteryBarPainter({required this.batteryPercentage});
   @override
   void paint(final Canvas canvas, final Size size) {
+    final double percentage = double.parse(batteryPercentage) / 100;
+    if (batteryPercentage == '0') {
+      return;
+    }
     final double strokeWidth = size.height / 2;
     final Offset startingPoint = Offset(strokeWidth, strokeWidth);
-    final length = size.width * (double.parse(batteryPercentage) / 100);
+    final length = size.width * percentage;
     final Offset endingPoint = Offset(length - strokeWidth, strokeWidth);
     final paint = Paint()
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..shader = const LinearGradient(
         colors: [
-          Colors.red,
-          Colors.yellow,
-          Colors.green,
+          appOrange,
+          appGreenYellow,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -59,7 +59,7 @@ class BatteryBarPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         text: batteryPercentage,
-        style: TextStyle(fontSize: strokeWidth, color: Colors.white),
+        style: TextStyle(fontSize: strokeWidth, color: Colors.black),
       ),
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.left,
@@ -71,6 +71,65 @@ class BatteryBarPainter extends CustomPainter {
     textPainter
       ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
       ..paint(canvas, Offset(strokeWidth, strokeWidth / 2));
+  }
+
+  @override
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class BatteryPercentageCircularPainter extends CustomPainter {
+  final String batteryPercentage;
+
+  BatteryPercentageCircularPainter(this.batteryPercentage);
+  @override
+  void paint(final Canvas canvas, final Size size) {
+    if (batteryPercentage == '0') {
+      return;
+    }
+    final double percentage = double.parse(batteryPercentage) / 100;
+    final radius = size.height / 2.5;
+    final center = Offset(size.width / 2, size.height / 2);
+    final double fontSize = size.height / 10;
+    final double strokeWidth = size.height / 20;
+
+    final backgroundPaint = Paint()
+      ..strokeWidth = strokeWidth / 2
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..color = appLightBlue;
+
+    canvas.drawCircle(center, radius, backgroundPaint);
+
+    final foregroundPaint = Paint()
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..color = appGreenYellow;
+
+    canvas.drawArc(
+      Rect.fromCircle(
+        center: center,
+        radius: radius,
+      ),
+      -pi / 2,
+      pi * 2 * percentage,
+      false,
+      foregroundPaint,
+    );
+
+    TextPainter(
+      text: TextSpan(
+        text: batteryPercentage,
+        style: TextStyle(fontSize: fontSize, color: appLightBlue),
+      ),
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.left,
+      textScaleFactor: 1,
+    )
+      ..layout(minWidth: 0, maxWidth: strokeWidth * 5)
+      ..paint(canvas, center - Offset(fontSize / 2, fontSize / 2));
   }
 
   @override

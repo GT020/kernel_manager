@@ -41,4 +41,20 @@ class BatteryProvidersAndroid implements BatteryProviders {
   Future<String> getVoltageNode() async {
     return '/sys/class/power_supply/battery/voltage_now';
   }
+
+  @override
+  Future<double> getCurrentMax() async {
+    final String currentMax =
+        await ReadUtil.ioRead('/sys/class/power_supply/battery/current_max');
+
+    return double.parse(currentMax);
+  }
+
+  @override
+  Future<double> getVoltageMax() async {
+    final String voltageMax =
+        await ReadUtil.ioRead('/sys/class/power_supply/battery/voltage_max');
+
+    return double.parse(voltageMax);
+  }
 }

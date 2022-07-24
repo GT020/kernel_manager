@@ -7,7 +7,8 @@ class BatteryModel {
   final String voltageNode;
   final String percentageNode;
   final String statusNode;
-
+  final double currentMax;
+  final double voltageMax;
   BatteryModel(
     this.technology,
     this.health,
@@ -16,6 +17,6 @@ class BatteryModel {
     this.currentNode,
     this.voltageNode,
     this.percentageNode,
-    this.statusNode,
+    this.statusNode, this.currentMax, this.voltageMax,
   );
 }

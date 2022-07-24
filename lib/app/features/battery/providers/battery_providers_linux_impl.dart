@@ -48,4 +48,16 @@ class BatteryProvidersLinux extends BatteryProviders {
     // TODO: implement getVoltageNode
     throw UnimplementedError();
   }
+
+  @override
+  Future<double> getCurrentMax() {
+    // TODO: implement getCurrentMax
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<double> getVoltageMax() {
+    // TODO: implement getVoltageMax
+    throw UnimplementedError();
+  }
 }
