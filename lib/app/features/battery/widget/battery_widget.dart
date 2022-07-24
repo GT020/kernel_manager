@@ -12,33 +12,45 @@ class BatteryWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Card(
-          child: Text('Battery Technology : ${battery.technology}'),
-        ),
-        Card(
-          child: Text('Battery Health : ${battery.health}'),
-        ),
-        Card(
-          child: Text('Battery TotalCapacity : ${battery.totalCapacity}'),
-        ),
-        Card(
-          child: BatteryPercentageWidget(
-            batteryPercentageNode: battery.percentageNode,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Card(
+              child: BatteryPercentageWidget(
+                batteryPercentageNode: battery.percentageNode,
+              ),
+            ),
+            SizedBox(
+              height: 150,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Battery Technology : ${battery.technology}'),
+                      Text('Battery Health : ${battery.health}'),
+                      Text('Battery TotalCapacity : ${battery.totalCapacity}'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         Card(
           child: Text('Max Current : ${battery.currentMax}'),
-        ),
-        Card(
-          child: Text('Max Voltage : ${battery.voltageMax}'),
         ),
         Card(
           child: BatteryCurrentNowWidget(
             currentNowNode: battery.currentNode,
             currentMax: battery.currentMax,
           ),
+        ),
+        Card(
+          child: Text('Max Voltage : ${battery.voltageMax}'),
         ),
         Card(
           child: BatteryVoltageNowWidget(

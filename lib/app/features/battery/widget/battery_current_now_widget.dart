@@ -23,7 +23,7 @@ class BatteryCurrentNowWidget extends ConsumerWidget {
     final asyncCurrent = ref.watch(currentNowStreamProvider(currentNowNode));
 
     return CustomPaint(
-      size: const Size(20, 20),
+      size: const Size(double.infinity, 20),
       painter: BatteryCurrentBarPainter(
         currentNow: asyncCurrent.when(
           data: (final data) => data,

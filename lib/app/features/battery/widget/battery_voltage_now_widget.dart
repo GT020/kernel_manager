@@ -23,7 +23,7 @@ class BatteryVoltageNowWidget extends ConsumerWidget {
     final asyncVoltage = ref.watch(voltageNowStreamProvider(voltageNowNode));
 
     return CustomPaint(
-      size: const Size(20, 20),
+      size: const Size(double.infinity, 20),
       painter: BatteryVoltageBarPainter(
         voltageNow: asyncVoltage.when(
           data: (final data) => data,
