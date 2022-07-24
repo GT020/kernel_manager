@@ -29,6 +29,8 @@ class GpuWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GpuLiveFrequencyWidget(
               gpuCurrentFrequencyNode: gpu.currentFrequencyNode,
+              minFrequency: gpu.minFrequency,
+              maxFrequency: gpu.maxFrequency,
             ),
           ),
         ),
