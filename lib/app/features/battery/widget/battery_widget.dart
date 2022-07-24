@@ -11,39 +11,39 @@ class BatteryWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return Column(
+    final width = MediaQuery.of(context).size.width - 16;
+
+    return Wrap(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Card(
               child: BatteryPercentageWidget(
                 height: 150,
-                width: 150,
+                width: width / 2,
                 batteryPercentageNode: battery.percentageNode,
               ),
             ),
-            SizedBox(
-              height: 150,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Battery Technology : ${battery.technology}'),
-                      Text('Battery Health : ${battery.health}'),
-                      Text('Battery TotalCapacity : ${battery.totalCapacity}'),
-                    ],
-                  ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Battery Technology${battery.technology}'),
+                    Text('Battery Health : ${battery.health}'),
+                    Text('Battery TotalCapacity : ${battery.totalCapacity}'),
+                  ],
                 ),
               ),
             ),
           ],
         ),
         Card(
-          child: Text('Max Current : ${battery.currentMax}'),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Max Current : ${battery.currentMax}'),
+          ),
         ),
         Card(
           child: BatteryCurrentNowWidget(
@@ -52,7 +52,10 @@ class BatteryWidget extends StatelessWidget {
           ),
         ),
         Card(
-          child: Text('Max Voltage : ${battery.voltageMax}'),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Max Voltage : ${battery.voltageMax}'),
+          ),
         ),
         Card(
           child: BatteryVoltageNowWidget(
