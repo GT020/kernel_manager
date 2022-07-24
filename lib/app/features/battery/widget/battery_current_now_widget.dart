@@ -63,7 +63,7 @@ class BatteryCurrentBarPainter extends CustomPainter {
     }
     final currentPercentage = (current.abs() / currentMax) * 100;
     final strokeWidth = size.height / 2;
-    final length = size.width * currentPercentage;
+    final length = size.width * currentPercentage - strokeWidth;
     final paint = Paint()
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round

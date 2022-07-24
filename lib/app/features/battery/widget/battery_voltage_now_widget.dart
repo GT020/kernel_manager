@@ -63,7 +63,7 @@ class BatteryVoltageBarPainter extends CustomPainter {
     final Color color = voltage < 0 ? appOrange : appGreenYellow;
     final voltagePercentage = voltage.abs() / voltageMax;
     final strokeWidth = size.height / 2;
-    final length = size.width * voltagePercentage;
+    final length = size.width * voltagePercentage - strokeWidth;
     final paint = Paint()
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
