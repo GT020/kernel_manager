@@ -17,10 +17,15 @@ class RamView extends ConsumerWidget {
   Widget build(final BuildContext context, final WidgetRef ref) {
     final AsyncValue<RamModel> asyncRam = ref.watch(ramProvider);
 
-    return asyncRam.when(
-      data: (final ram) => RamWidget(ram: ram),
-      error: (final e, final s) => Text('$e'),
-      loading: CircularProgressIndicator.new,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('RAM'),
+      ),
+      body: asyncRam.when(
+        data: (final ram) => RamWidget(ram: ram),
+        error: (final e, final s) => Text('$e'),
+        loading: CircularProgressIndicator.new,
+      ),
     );
   }
 }
