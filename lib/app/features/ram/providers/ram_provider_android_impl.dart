@@ -2,20 +2,17 @@ import 'package:penguin_kernel_manager/app/features/ram/providers/ram_providers.
 
 class RamProviderAndroid extends RamProvider {
   @override
-  Future<double> getTotalCapacity() {
-    // TODO: implement getTotalCapacity
-    throw UnimplementedError();
+  Future<double> getTotalCapacity() async {
+    return 8000000.0;
   }
 
   @override
-  Future<String> getUsedRamNode() {
-    // TODO: implement getUsedRamNode
-    throw UnimplementedError();
+  Future<String> getUsedRamNode() async {
+    return 'proc/meminfo';
   }
 
   @override
-  Future<String> getZramNode() {
-    // TODO: implement getZramNode
-    throw UnimplementedError();
+  Future<String> getZramNode() async {
+    return '/sys/block/zram0/disksize';
   }
 }
