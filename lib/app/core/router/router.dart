@@ -4,6 +4,7 @@ import 'package:penguin_kernel_manager/app/features/battery/view/battery_view.da
 import 'package:penguin_kernel_manager/app/features/cpu/view/cpu_view.dart';
 import 'package:penguin_kernel_manager/app/features/gpu/view/gpu_view.dart';
 import 'package:penguin_kernel_manager/app/features/home/view/home_view.dart';
+import 'package:penguin_kernel_manager/app/features/ram/view/ram_view.dart';
 
 ///
 /// for getting routers that are present in the app
@@ -28,6 +29,10 @@ final Provider<GoRouter> routerProvider = Provider<GoRouter>(
         GoRoute(
           path: BatteryView.routeName,
           builder: (final context, final state) => const BatteryView(),
+        ),
+        GoRoute(
+          path: RamView.routeName,
+          builder: (final context, final state) => const RamView(),
         ),
       ],
     );
