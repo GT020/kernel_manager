@@ -23,7 +23,7 @@ class GpuMonitorView extends ConsumerWidget {
       ),
       body: asyncGpu.when(
         data: (final gpu) {
-          return GpuWidget(gpu: gpu);
+          return GpuMonitorWidget(gpu: gpu);
         },
         error: (final e, final s) {
           return Text(e.toString());

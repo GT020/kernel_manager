@@ -20,12 +20,10 @@ class GpuRepositoryImpl extends GpuRepository {
   @override
   Future<GpuMonitorModel> getGpu() async {
     return GpuMonitorModel(
-      await gpuProviders.getGpuName(),
-      await gpuProviders.getGpuCurrentFrequencyNode(),
-      await gpuProviders.getGpuAvailableFrequencies(),
-      await gpuProviders.getGpuAvailableGovernors(),
-      await gpuProviders.getMinFrequency(),
-      await gpuProviders.getMaxFrequency(),
+      name: await gpuProviders.getGpuName(),
+      currentFrequencyNode: await gpuProviders.getGpuCurrentFrequencyNode(),
+      minFrequency: await gpuProviders.getMinFrequency(),
+      maxFrequency: await gpuProviders.getMaxFrequency(),
     );
   }
 }

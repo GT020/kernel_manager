@@ -3,15 +3,11 @@ class GpuMonitorModel {
   final String currentFrequencyNode;
   final double minFrequency;
   final double maxFrequency;
-  final List<double> availableFrequencies;
-  final List<String> availableGovernors;
 
-  GpuMonitorModel(
-    this.name,
-    this.currentFrequencyNode,
-    this.availableFrequencies,
-    this.availableGovernors,
-    this.minFrequency,
-    this.maxFrequency,
-  );
+  GpuMonitorModel({
+    required this.name,
+    required this.currentFrequencyNode,
+    required this.minFrequency,
+    required this.maxFrequency,
+  });
 }
