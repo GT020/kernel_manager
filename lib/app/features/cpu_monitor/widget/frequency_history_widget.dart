@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:penguin_kernel_manager/app/features/cpu/model/core_state_model.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
+import 'package:penguin_kernel_manager/app/features/cpu_monitor/model/core_state_model.dart';
 
-class FrequencyHistory extends StatelessWidget {
+class FrequencyHistoryWidget extends StatelessWidget {
   final List<CoreStateModel> history;
-  const FrequencyHistory({final Key? key, required this.history})
+  const FrequencyHistoryWidget({final Key? key, required this.history})
       : super(key: key);
 
   @override
@@ -16,8 +17,6 @@ class FrequencyHistory extends StatelessWidget {
             painter: FrequencyHistoryBarPainter(
               fillBarColor: Theme.of(context).primaryColor,
               coreState: coreState,
-              frequencyTextColor: Theme.of(context).textTheme.bodyText1!.color,
-              percentageTextColor: Theme.of(context).textTheme.bodyText2!.color,
             ),
           ),
         ),
@@ -32,8 +31,8 @@ class FrequencyHistoryBarPainter extends CustomPainter {
   final Color? frequencyTextColor;
   final Color? percentageTextColor;
   FrequencyHistoryBarPainter({
-    this.frequencyTextColor = Colors.white,
-    this.percentageTextColor = Colors.white,
+    this.frequencyTextColor = appArsenic,
+    this.percentageTextColor = appArsenic,
     required this.coreState,
     required this.fillBarColor,
   });
@@ -42,7 +41,6 @@ class FrequencyHistoryBarPainter extends CustomPainter {
 
   // ignore: long-method
   void paint(final Canvas canvas, final Size size) {
-    //TODO: refactor this method
     final double strokeWidth = size.height - 2;
 
     final backgroundPaint = Paint()

@@ -1,20 +1,6 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
-import 'package:rxdart/rxdart.dart';
-
-final liveFrequencyProvider = StreamProvider.family<double, String>(
-  (final ref, final arg) {
-    final BehaviorSubject<double> subject = BehaviorSubject<double>();
-    ReadUtil.readStream(arg).listen((final data) {
-      subject.add(double.parse(data));
-    });
-
-    return subject;
-  },
-);
 
 class LiveFrequencyGraphWidget extends StatelessWidget {
   final Queue<double> last10Frequencies = Queue<double>();
@@ -34,34 +20,32 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return StreamBuilder<String>(
-      builder: (final context, final snap) {
-        if (snap.hasData) {
-          if (last10Frequencies.length > 10) {
-            last10Frequencies.removeFirst();
-          }
-          last10Frequencies.add(double.parse(snap.requireData));
+    return GridPaper(
+      child: StreamBuilder<String>(
+        builder: (final context, final snap) {
+          if (snap.hasData) {
+            if (last10Frequencies.length > 10) {
+              last10Frequencies.removeFirst();
+            }
+            last10Frequencies.add(double.parse(snap.requireData));
 
-          return GridPaper(
-            child: CustomPaint(
+            return CustomPaint(
               size: Size(width, height),
               painter: FrequencyGraphPainter(
                 color: color,
                 freqs: last10Frequencies,
                 maxF: maxFrequency,
               ),
-            ),
-          );
-        }
+            );
+          }
 
-        return GridPaper(
-          child: SizedBox(
+          return SizedBox(
             height: height,
             width: width,
-          ),
-        );
-      },
-      stream: currentFrequencyStream,
+          );
+        },
+        stream: currentFrequencyStream,
+      ),
     );
   }
 }

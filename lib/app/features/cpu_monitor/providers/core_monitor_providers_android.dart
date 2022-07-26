@@ -1,53 +1,32 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:penguin_kernel_manager/app/features/cpu/model/core_state_model.dart';
-import 'package:penguin_kernel_manager/app/features/cpu/providers/core_providers.dart';
+import 'package:penguin_kernel_manager/app/features/cpu_monitor/model/core_state_model.dart';
+import 'package:penguin_kernel_manager/app/features/cpu_monitor/providers/core_monitor_providers.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-class CoreProviderAndroid implements CoreProviders {
+class CoreMonitorProvidersAndroid extends CoreMonitorProviders {
   static const MethodChannel channel = MethodChannel('penguin_kernel_manager');
 
-  RegExp frequencyRegex = RegExp(
-    r'![\d+]',
-  );
-
   @override
-  Future<List<double>> getAvailableFrequencies(final int coreNumber) async {
-    final String availableFrequencies = await ReadUtil.ioRead(
-      '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_available_frequencies',
-    );
-    final List<double> intF = [];
-
-    final List<String> listOfFrequencies =
-        availableFrequencies.trim().split(' ');
-    for (final String freq in listOfFrequencies) {
-      intF.add(double.parse(freq));
-    }
-
-    return intF;
-  }
-
-  @override
-  Future<List<String>> getAvailableGovernor(final int coreNumber) async {
-    final List<String> availableGovernor = (await ReadUtil.ioRead(
-      '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_available_governors',
-    ))
-        .split(' ');
-
-    return availableGovernor;
-  }
-
-  @override
-  Future<String> getCoreFrequency(final int coreNumber) async {
+  Future<String> getCurrentFrequencyNode(final int coreNumber) async {
     return '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_cur_freq';
   }
 
   @override
-  Future<List<CoreStateModel>> getCoreStates(final int coreNumber) async {
-    /// return a list of CoreStateModel
-    /// each element of the list is a CoreStateModel for a core
+  Future<String> getCurrentGovernorNode(final int coreNumber) async {
+    return '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_governor';
+  }
 
+  @override
+  Future<String> getCurrentTemperatureNode(final int coreNumber) async {
+    return '/sys/class/thermal/thermal_zone0/temp';
+  }
+
+  /// return a list of CoreStateModel
+  /// each element of the list is a CoreStateModel for a core
+  @override
+  Future<List<CoreStateModel>> getStates(final int coreNumber) async {
     //list for coreStates
     final List<CoreStateModel> coreStates = [];
 
@@ -110,5 +89,23 @@ class CoreProviderAndroid implements CoreProviders {
         (await channel.invokeMethod<int>('getDeepSleep')) ?? 0;
 
     return deepSleep.toDouble();
+  }
+
+  @override
+  Future<double> getMaxFrequency(final int coreNumber) async {
+    final String maxFrequency = await ReadUtil.cat(
+      '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_max_freq',
+    );
+
+    return double.parse(maxFrequency);
+  }
+
+  @override
+  Future<double> getMinFrequency(final int coreNumber) async {
+    final String minFrequency = await ReadUtil.cat(
+      '/sys/devices/system/cpu/cpu$coreNumber/cpufreq/scaling_min_freq',
+    );
+
+    return double.parse(minFrequency);
   }
 }
