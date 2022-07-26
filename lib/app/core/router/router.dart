@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/view/battery_monitor_view.dart';
 import 'package:penguin_kernel_manager/app/features/cpu_monitor/view/cpu_monitor_view.dart';
-import 'package:penguin_kernel_manager/app/features/gpu_monitor/view/gpu_view.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/view/gpu_monitor_view.dart';
 import 'package:penguin_kernel_manager/app/features/home/view/home_view.dart';
 import 'package:penguin_kernel_manager/app/features/ram/view/ram_view.dart';
 

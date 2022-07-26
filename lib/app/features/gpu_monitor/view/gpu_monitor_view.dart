@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/gpu_monitor/model/gpu_model.dart';
-import 'package:penguin_kernel_manager/app/features/gpu_monitor/repository/gpu_repository_impl.dart';
-import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/model/gpu_monitor_model.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/repository/gpu_monitor_repository_impl.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_monitor_widget.dart';
 
 final FutureProvider<GpuMonitorModel> gpuProvider = FutureProvider((final ref) {
   return ref.read(gpuRepositoryProvider).getGpu();

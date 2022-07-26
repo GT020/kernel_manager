@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/battery_monitor/model/battery_model.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/model/battery_monitor_model.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/repository/battery_monitor_repository_impl.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/battery_monitor_widget.dart';
 

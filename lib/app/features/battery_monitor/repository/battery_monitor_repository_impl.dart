@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/battery_monitor/model/battery_model.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/model/battery_monitor_model.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/providers/battery_monitor_providers.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/providers/battery_monitor_providers_android_impl.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/providers/battery_monitor_providers_linux_impl.dart';
