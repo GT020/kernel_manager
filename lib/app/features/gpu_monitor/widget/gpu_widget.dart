@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_frequency_widget.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_governor_widget.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_live_frequency_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/model/gpu_model.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_frequency_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_governor_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_live_frequency_widget.dart';
 
 class GpuWidget extends StatelessWidget {
-  final GpuModel gpu;
+  final GpuMonitorModel gpu;
 
   /// Gpu Widget
   const GpuWidget({

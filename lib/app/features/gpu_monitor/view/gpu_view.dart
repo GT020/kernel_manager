@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/model/gpu_model.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/repository/gpu_repository_impl.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/widget/gpu_widget.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/model/gpu_model.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/repository/gpu_repository_impl.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/widget/gpu_widget.dart';
 
-final FutureProvider<GpuModel> gpuProvider = FutureProvider((final ref) {
+final FutureProvider<GpuMonitorModel> gpuProvider = FutureProvider((final ref) {
   return ref.read(gpuRepositoryProvider).getGpu();
 });
 
-class GpuView extends ConsumerWidget {
-  const GpuView({final Key? key}) : super(key: key);
+class GpuMonitorView extends ConsumerWidget {
+  const GpuMonitorView({final Key? key}) : super(key: key);
 
   static const routeName = '/gpu';
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
-    final AsyncValue<GpuModel> asyncGpu = ref.watch(gpuProvider);
+    final AsyncValue<GpuMonitorModel> asyncGpu = ref.watch(gpuProvider);
 
     return Scaffold(
       appBar: AppBar(

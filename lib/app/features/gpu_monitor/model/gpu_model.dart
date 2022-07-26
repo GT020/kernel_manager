@@ -1,4 +1,4 @@
-class GpuModel {
+class GpuMonitorModel {
   final String name;
   final String currentFrequencyNode;
   final double minFrequency;
@@ -6,7 +6,7 @@ class GpuModel {
   final List<double> availableFrequencies;
   final List<String> availableGovernors;
 
-  GpuModel(
+  GpuMonitorModel(
     this.name,
     this.currentFrequencyNode,
     this.availableFrequencies,

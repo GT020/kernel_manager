@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/providers/gpu_providers.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/providers/gpu_providers.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 import 'package:penguin_kernel_manager/app/utils/root_utils.dart';
 
-class GpuProvidersAndroid implements GpuProviders {
+class GpuMonitorProvidersAndroid implements GpuMonitorProviders {
   @override
   Future<List<double>> getGpuAvailableFrequencies() async {
     final List<double> intF = [];

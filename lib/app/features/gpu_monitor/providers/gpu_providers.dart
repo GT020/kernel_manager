@@ -1,4 +1,4 @@
-abstract class GpuProviders {
+abstract class GpuMonitorProviders {
   Future<String> getGpuName();
   Future<String> getGpuCurrentFrequencyNode();
   Future<double> getMinFrequency();
