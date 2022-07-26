@@ -1,7 +1,7 @@
-import 'package:penguin_kernel_manager/app/features/battery/providers/battery_providers.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/providers/battery_monitor_providers.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-class BatteryProvidersAndroid implements BatteryProviders {
+class BatteryMonitorProvidersAndroid implements BatteryMonitorProviders {
   @override
   Future<String> getCurrentNode() async {
     return '/sys/class/power_supply/battery/current_now';

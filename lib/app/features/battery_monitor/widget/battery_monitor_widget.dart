@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/battery/model/battery_model.dart';
-import 'package:penguin_kernel_manager/app/features/battery/widget/battery_current_now_widget.dart';
-import 'package:penguin_kernel_manager/app/features/battery/widget/battery_percentage_widget.dart';
-import 'package:penguin_kernel_manager/app/features/battery/widget/battery_voltage_now_widget.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/model/battery_model.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/battery_current_now_widget.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/battery_percentage_widget.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/battery_voltage_now_widget.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final chargingStatusProvider =
@@ -12,7 +12,7 @@ final chargingStatusProvider =
 });
 
 class BatteryWidget extends StatelessWidget {
-  final BatteryModel battery;
+  final BatteryMonitorModel battery;
   const BatteryWidget({final Key? key, required this.battery})
       : super(key: key);
 

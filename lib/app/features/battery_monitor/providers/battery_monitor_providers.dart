@@ -1,4 +1,4 @@
-abstract class BatteryProviders {
+abstract class BatteryMonitorProviders {
   Future<String> getTechnology();
   Future<String> getHealth();
   Future<String> getTotalCapacity();

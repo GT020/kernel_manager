@@ -1,6 +1,6 @@
-import 'package:penguin_kernel_manager/app/features/battery/providers/battery_providers.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/providers/battery_monitor_providers.dart';
 
-class BatteryProvidersLinux extends BatteryProviders {
+class BatteryMonitorProvidersLinux extends BatteryMonitorProviders {
   @override
   Future<String> getCurrentNode() {
     // TODO: implement getCurrentNode
