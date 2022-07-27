@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/features/battery_monitor/view/battery_monitor_view.dart';
 import 'package:penguin_kernel_manager/app/features/cpu_monitor/view/cpu_monitor_view.dart';
 import 'package:penguin_kernel_manager/app/features/gpu_monitor/view/gpu_monitor_view.dart';
-import 'package:penguin_kernel_manager/app/features/ram/view/ram_view.dart';
+import 'package:penguin_kernel_manager/app/features/ram_monitor/view/ram_monitor_view.dart';
 
 class HomeView extends ConsumerWidget {
   /// Home View
@@ -50,12 +50,12 @@ class HomeView extends ConsumerWidget {
           ),
           MaterialButton(
             onPressed: () {
-              context.push(RamView.routeName);
+              context.push(RamMonitorView.routeName);
             },
             child: const Card(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Ram'),
+                child: Text('Ram Monitor'),
               ),
             ),
           ),
