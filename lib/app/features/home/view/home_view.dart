@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:penguin_kernel_manager/app/features/battery/view/battery_view.dart';
-import 'package:penguin_kernel_manager/app/features/cpu/view/cpu_view.dart';
-import 'package:penguin_kernel_manager/app/features/gpu/view/gpu_view.dart';
+import 'package:penguin_kernel_manager/app/features/battery_monitor/view/battery_monitor_view.dart';
+import 'package:penguin_kernel_manager/app/features/cpu_monitor/view/cpu_monitor_view.dart';
+import 'package:penguin_kernel_manager/app/features/gpu_monitor/view/gpu_monitor_view.dart';
+import 'package:penguin_kernel_manager/app/features/ram_monitor/view/ram_monitor_view.dart';
 
 class HomeView extends ConsumerWidget {
   /// Home View
@@ -19,14 +20,17 @@ class HomeView extends ConsumerWidget {
       ),
       body: Wrap(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           MaterialButton(
             onPressed: () {
-              context.push(CpuView.routeName);
+              context.push(GpuMonitorView.routeName);
             },
             child: const Card(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('CPU'),
+                child: Text('GPU Monitor'),
               ),
             ),
           ),
@@ -35,26 +39,34 @@ class HomeView extends ConsumerWidget {
           ),
           MaterialButton(
             onPressed: () {
-              context.push(GpuView.routeName);
+              context.push(BatteryMonitor.routeName);
             },
             child: const Card(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('GPU'),
+                child: Text('Battery Monitor'),
               ),
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
           MaterialButton(
             onPressed: () {
-              context.push(BatteryView.routeName);
+              context.push(RamMonitorView.routeName);
             },
             child: const Card(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Battery'),
+                child: Text('Ram Monitor'),
+              ),
+            ),
+          ),
+          MaterialButton(
+            onPressed: () {
+              context.push(CpuMonitorView.routeName);
+            },
+            child: const Card(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Cpu Monitor'),
               ),
             ),
           ),
