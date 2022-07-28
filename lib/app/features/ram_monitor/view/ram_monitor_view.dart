@@ -15,7 +15,7 @@ class RamMonitorView extends ConsumerWidget {
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
-    final AsyncValue<RamMonitorModel> asyncRam = ref.read(ramProvider);
+    final AsyncValue<RamMonitorModel> asyncRam = ref.watch(ramProvider);
 
     return Scaffold(
       appBar: AppBar(
