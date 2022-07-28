@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 
 class LiveFrequencyGraphWidget extends StatelessWidget {
   final Queue<double> last10Frequencies = Queue<double>();
@@ -20,32 +21,30 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return GridPaper(
-      child: StreamBuilder<String>(
-        builder: (final context, final snap) {
-          if (snap.hasData) {
-            if (last10Frequencies.length > 10) {
-              last10Frequencies.removeFirst();
-            }
-            last10Frequencies.add(double.parse(snap.requireData));
-
-            return CustomPaint(
-              size: Size(width, height),
-              painter: FrequencyGraphPainter(
-                color: color,
-                freqs: last10Frequencies,
-                maxF: maxFrequency,
-              ),
-            );
+    return StreamBuilder<String>(
+      builder: (final context, final snap) {
+        if (snap.hasData) {
+          if (last10Frequencies.length > 20) {
+            last10Frequencies.removeFirst();
           }
+          last10Frequencies.add(double.parse(snap.requireData));
 
-          return SizedBox(
-            height: height,
-            width: width,
+          return CustomPaint(
+            size: Size(width, height),
+            painter: FrequencyGraphPainter(
+              color: color,
+              freqs: last10Frequencies,
+              maxF: maxFrequency,
+            ),
           );
-        },
-        stream: currentFrequencyStream,
-      ),
+        }
+
+        return SizedBox(
+          height: height,
+          width: width,
+        );
+      },
+      stream: currentFrequencyStream,
     );
   }
 }
@@ -63,29 +62,41 @@ class FrequencyGraphPainter extends CustomPainter {
   @override
   void paint(final Canvas canvas, final Size size) {
     const strokeWidth = 2.0;
-    Offset startingPoint = Offset(0, size.height);
-    final double lineLength = size.width / freqs.length;
+    final double lineLength = size.width / 20;
+
     final backgroundPaint = Paint()
       ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.fill
       ..strokeCap = StrokeCap.round
-      ..color = color;
+      ..color = appLightBlue.withOpacity(0.2);
 
-    // ignore: prefer-correct-identifier-length
-    for (int i = 0; i < freqs.length; i++) {
-      final double freq = freqs.elementAt(i);
-      // ignore: prefer-correct-identifier-length
-      final y = size.height - (freq / maxF) * size.height;
-      // ignore: prefer-correct-identifier-length
-      final x = i * lineLength;
+    final foregroundPaint = Paint()
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.fill
+      ..strokeCap = StrokeCap.round
+      ..color = appLightBlue;
 
-      if (i == 0) {
-        canvas.drawLine(Offset(x, y), Offset(x, y), backgroundPaint);
-        startingPoint = Offset(x, y);
-      } else {
-        canvas.drawLine(startingPoint, Offset(x, y), backgroundPaint);
-        startingPoint = Offset(x, y);
-      }
+    Offset previous =
+        Offset(0, size.height - ((freqs.first / maxF) * size.height));
+    final Path path = Path()..moveTo(0, previous.dy);
+    double nextX = lineLength;
+    for (int index = 1; index < freqs.length; index++) {
+      // ignore: prefer-correct-identifier-length
+      final y = (freqs.elementAt(index) / maxF) * size.height;
+
+      path.lineTo(nextX, size.height - y);
+      canvas.drawLine(
+        previous,
+        Offset(nextX, size.height - y),
+        foregroundPaint,
+      );
+      previous = Offset(nextX, size.height - y);
+      nextX += lineLength;
     }
+    path
+      ..lineTo(nextX - lineLength, size.height)
+      ..lineTo(0, size.height);
+    canvas.drawPath(path, backgroundPaint);
   }
 
   @override
