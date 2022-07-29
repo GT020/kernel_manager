@@ -3,7 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-final voltageNowStreamProvider = StreamProvider.family<String, String>(
+final voltageNowStreamProvider =
+    StreamProvider.family.autoDispose<String, String>(
   (final ref, final String voltageNode) {
     return ReadUtil.readStream(voltageNode);
   },

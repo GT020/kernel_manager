@@ -3,14 +3,13 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 
-class LiveFrequencyGraphWidget extends StatelessWidget {
-  final Queue<double> last10Frequencies = Queue<double>();
+class LiveFrequencyGraphWidget extends StatefulWidget {
   final Stream<String> currentFrequencyStream;
   final double maxFrequency;
   final double height;
   final double width;
   final Color color;
-  LiveFrequencyGraphWidget({
+  const LiveFrequencyGraphWidget({
     final Key? key,
     required this.color,
     required this.height,
@@ -20,6 +19,16 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<LiveFrequencyGraphWidget> createState() =>
+      _LiveFrequencyGraphWidgetState();
+}
+
+class _LiveFrequencyGraphWidgetState extends State<LiveFrequencyGraphWidget>
+    with AutomaticKeepAliveClientMixin {
+  final Queue<double> last10Frequencies = Queue<double>();
+
+  @override
+  @mustCallSuper
   Widget build(final BuildContext context) {
     return StreamBuilder<String>(
       builder: (final context, final snap) {
@@ -30,23 +39,26 @@ class LiveFrequencyGraphWidget extends StatelessWidget {
           last10Frequencies.add(double.parse(snap.requireData));
 
           return CustomPaint(
-            size: Size(width, height),
+            size: Size(widget.width, widget.height),
             painter: FrequencyGraphPainter(
-              color: color,
+              color: widget.color,
               freqs: last10Frequencies,
-              maxF: maxFrequency,
+              maxF: widget.maxFrequency,
             ),
           );
         }
 
         return SizedBox(
-          height: height,
-          width: width,
+          height: widget.height,
+          width: widget.width,
         );
       },
-      stream: currentFrequencyStream,
+      stream: widget.currentFrequencyStream,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class FrequencyGraphPainter extends CustomPainter {

@@ -6,8 +6,8 @@ import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/batte
 import 'package:penguin_kernel_manager/app/features/battery_monitor/widget/battery_voltage_now_widget.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-final chargingStatusProvider =
-    StreamProvider.family<String, String>((final ref, final String node) {
+final chargingStatusProvider = StreamProvider.family
+    .autoDispose<String, String>((final ref, final String node) {
   return ReadUtil.readStream(node);
 });
 
@@ -23,32 +23,36 @@ class BatteryWidget extends StatelessWidget {
     return Wrap(
       children: [
         Center(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Consumer(
-                builder: (final context, final ref, final widget) {
-                  final asyncChargingStatus =
-                      ref.watch(chargingStatusProvider(battery.statusNode));
-                  final chargingStatus = asyncChargingStatus.when(
-                    data: (final data) => data,
-                    error: (final e, final s) => '',
-                    loading: () => '',
-                  );
+          child: RepaintBoundary(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Consumer(
+                  builder: (final context, final ref, final widget) {
+                    final asyncChargingStatus =
+                        ref.watch(chargingStatusProvider(battery.statusNode));
+                    final chargingStatus = asyncChargingStatus.when(
+                      data: (final data) => data,
+                      error: (final e, final s) => '',
+                      loading: () => '',
+                    );
 
-                  return Text(
-                    'Status : $chargingStatus',
-                  );
-                },
+                    return Text(
+                      'Status : $chargingStatus',
+                    );
+                  },
+                ),
               ),
             ),
           ),
         ),
-        Card(
-          child: BatteryPercentageWidget(
-            height: 150,
-            width: width / 2,
-            batteryPercentageNode: battery.percentageNode,
+        RepaintBoundary(
+          child: Card(
+            child: BatteryPercentageWidget(
+              height: 150,
+              width: width / 2,
+              batteryPercentageNode: battery.percentageNode,
+            ),
           ),
         ),
         SizedBox(
@@ -67,16 +71,20 @@ class BatteryWidget extends StatelessWidget {
             ),
           ),
         ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Max Current : ${battery.currentMax}'),
+        RepaintBoundary(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Max Current : ${battery.currentMax}'),
+            ),
           ),
         ),
-        Card(
-          child: BatteryCurrentNowWidget(
-            currentNowNode: battery.currentNode,
-            currentMax: battery.currentMax,
+        RepaintBoundary(
+          child: Card(
+            child: BatteryCurrentNowWidget(
+              currentNowNode: battery.currentNode,
+              currentMax: battery.currentMax,
+            ),
           ),
         ),
         Card(
@@ -85,10 +93,12 @@ class BatteryWidget extends StatelessWidget {
             child: Text('Max Voltage : ${battery.voltageMax}'),
           ),
         ),
-        Card(
-          child: BatteryVoltageNowWidget(
-            voltageNowNode: battery.voltageNode,
-            voltageMax: battery.voltageMax,
+        RepaintBoundary(
+          child: Card(
+            child: BatteryVoltageNowWidget(
+              voltageNowNode: battery.voltageNode,
+              voltageMax: battery.voltageMax,
+            ),
           ),
         ),
       ],

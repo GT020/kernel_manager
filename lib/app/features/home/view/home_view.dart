@@ -14,63 +14,86 @@ class HomeView extends ConsumerWidget {
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Wrap(
-        children: [
-          const SizedBox(
-            height: 10,
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: const Text('Home'),
+    //   ),
+    //   body: Wrap(
+    //     children: [
+    //       const SizedBox(
+    //         height: 10,
+    //       ),
+    //       MaterialButton(
+    //         onPressed: () {
+    //           context.push(GpuMonitorView.routeName);
+    //         },
+    //         child: const Card(
+    //           child: Padding(
+    //             padding: EdgeInsets.all(8.0),
+    //             child: Text('GPU Monitor'),
+    //           ),
+    //         ),
+    //       ),
+    //       const SizedBox(
+    //         height: 10,
+    //       ),
+    //       MaterialButton(
+    //         onPressed: () {
+    //           context.push(BatteryMonitor.routeName);
+    //         },
+    //         child: const Card(
+    //           child: Padding(
+    //             padding: EdgeInsets.all(8.0),
+    //             child: Text('Battery Monitor'),
+    //           ),
+    //         ),
+    //       ),
+    //       MaterialButton(
+    //         onPressed: () {
+    //           context.push(RamMonitorView.routeName);
+    //         },
+    //         child: const Card(
+    //           child: Padding(
+    //             padding: EdgeInsets.all(8.0),
+    //             child: Text('Ram Monitor'),
+    //           ),
+    //         ),
+    //       ),
+    //       MaterialButton(
+    //         onPressed: () {
+    //           context.push(CpuMonitorView.routeName);
+    //         },
+    //         child: const Card(
+    //           child: Padding(
+    //             padding: EdgeInsets.all(8.0),
+    //             child: Text('Cpu Monitor'),
+    //           ),
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(
+            tabs: [
+              Text('Cpu'),
+              Text('Gpu'),
+              Text('Battery'),
+              Text('Ram'),
+            ],
           ),
-          MaterialButton(
-            onPressed: () {
-              context.push(GpuMonitorView.routeName);
-            },
-            child: const Card(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('GPU Monitor'),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          MaterialButton(
-            onPressed: () {
-              context.push(BatteryMonitor.routeName);
-            },
-            child: const Card(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Battery Monitor'),
-              ),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () {
-              context.push(RamMonitorView.routeName);
-            },
-            child: const Card(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Ram Monitor'),
-              ),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () {
-              context.push(CpuMonitorView.routeName);
-            },
-            child: const Card(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Cpu Monitor'),
-              ),
-            ),
-          ),
-        ],
+        ),
+        body: const TabBarView(
+          children: [
+            CpuMonitorView(),
+            GpuMonitorView(),
+            BatteryMonitor(),
+            RamMonitorView(),
+          ],
+        ),
       ),
     );
   }

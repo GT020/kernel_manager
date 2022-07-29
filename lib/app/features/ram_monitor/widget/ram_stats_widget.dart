@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
 final ramStatsProvider =
-    StreamProvider.family<String, String>((final ref, final node) {
+    StreamProvider.family.autoDispose<String, String>((final ref, final node) {
   return ReadUtil.catStream(node);
 });
 
@@ -21,9 +21,11 @@ class RamStatsWidget extends ConsumerWidget {
           children: stats
               .split('/n')
               .map(
-                (final s) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(child: Text(s)),
+                (final s) => RepaintBoundary(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(child: Text(s)),
+                  ),
                 ),
               )
               .toList(),

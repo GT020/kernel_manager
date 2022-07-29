@@ -22,13 +22,15 @@ class GpuMonitorWidget extends StatelessWidget {
             child: Text('Gpu : ${gpu.name}'),
           ),
         ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GpuLiveFrequencyWidget(
-              gpuCurrentFrequencyNode: gpu.currentFrequencyNode,
-              minFrequency: gpu.minFrequency,
-              maxFrequency: gpu.maxFrequency,
+        RepaintBoundary(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GpuLiveFrequencyWidget(
+                gpuCurrentFrequencyNode: gpu.currentFrequencyNode,
+                minFrequency: gpu.minFrequency,
+                maxFrequency: gpu.maxFrequency,
+              ),
             ),
           ),
         ),

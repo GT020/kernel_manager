@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:penguin_kernel_manager/app/core/theme/app_theme.dart';
 import 'package:penguin_kernel_manager/app/utils/read_utils.dart';
 
-final batteryPercentageProvider =
-    StreamProvider.family<String, String>((final ref, final percentageNode) {
-  return ReadUtil.readStream(percentageNode, interval: 5000);
+final batteryPercentageProvider = StreamProvider.family
+    .autoDispose<String, String>((final ref, final percentageNode) {
+  return ReadUtil.readStream(percentageNode, interval: 1000);
 });
 
 class BatteryPercentageWidget extends ConsumerWidget {
